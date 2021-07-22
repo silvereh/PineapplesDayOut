@@ -1,0 +1,36 @@
+{
+  "description": "Friendly OpenSea Creature that enjoys long swims in the ocean.", 
+  "external_url": "https://pineapplesdayout.com", 
+  "image": "https://pineapplesdayout.com/pa/6.jpg", 
+  "name": "Dave Starbelly",
+  "attributes": [
+    {
+      "trait_type": "Background", 
+      "value": "Hot Pink"
+    }, 
+    {
+      "trait_type": "Skin", 
+      "value": "Olive"
+    }, 
+    {
+      "trait_type": "Mouth", 
+      "value": "Growl"
+    }, 
+    {
+      "trait_type": "Eyes", 
+      "value": "X"
+    }, 
+    {
+      "trait_type": "Crown", 
+      "value": "Mixed"
+    }, 
+    {
+      "trait_type": "Footwear", 
+      "value": "Socks"
+    }, 
+    {
+      "trait_type": "Accessories", 
+      "value": "None"
+    }, 
+  ], 
+}
