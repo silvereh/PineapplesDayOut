@@ -56,5 +56,5 @@ By default, the script will produce 50 images, to produce more, type the number 
 
 ## Output
 
-The script will produce a number of images named `0.jpg`, `1.jpg`, etc... in the `_assets/output` directory.
-It will also produce a file named `metadata.json` in the directory `_assets` containing a summary of all produced images.
+The script will produce a number of images named `0.jpg`, `1.jpg`, etc... in the `_output` directoriy.
+It will also produce 2 files named `metadata.json`, and `traitcounts.json` in the `_output` directory, containing a summary of all produced images and a count of their traits, to determine rarity.
