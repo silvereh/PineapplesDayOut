@@ -108,4 +108,11 @@ window.addEventListener('DOMContentLoaded', () => {
 			mintPineapples();
 		}
 	});
+	document.addEventListener('change', event => {
+		event.preventDefault();
+		let target = event.target;
+		if (target == ELMTS.PINEAPPLES.QUANTITY) {
+			updatePrice();
+		}
+	});
 });
