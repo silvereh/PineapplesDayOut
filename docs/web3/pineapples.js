@@ -26,7 +26,7 @@ window.addEventListener('DOMContentLoaded', () => {
 	}
 
 	let getPrice = () => {
-		return pineapplesContract.methods.getPrice().call();
+		return pineapplesContract.methods.price.call();
 	}
 
 	let startApp = () => {
@@ -34,7 +34,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		if (salesOpen()) {
 			ELMTS.MINT.FORM.Display = 'block';
 			ELMTS.COMING.Display = 'none';
-			ELMTS.MINT.BUTTON.enable();
+			ELMTS.MINT.BUTTON.Disabled = false;
 			ELMTS.PINEAPPLES.REMAINING.innerText = `${new Intl.NumberFormat().format(MAX_SUPPLY - totalSupply())}`;
 		}
 
@@ -53,7 +53,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		let num = parseInt(ELMTS.PINEAPPLES.QUANTITY.value, 10);
 		if (num < 1 || num > 20) {
 			ELMTS.ALERT.innerHTML = `<p class="form-control alert-danger">Please, enter a valid number of pineapples.</p>`;
-			ELMTS.MINT.BUTTON.enable();
+			ELMTS.MINT.BUTTON.Disabled = false;
 			return;
 		}
 
@@ -65,14 +65,14 @@ window.addEventListener('DOMContentLoaded', () => {
 		return web3.eth.getBalance(userAccount)
 			.on('receipt', receipt => {
 				if (receipt <= parseFloat(ELMTS.PINEAPPLES.PRICE.innerText)) {
-					ELMTS.MINT.BUTTON.disable();
+					ELMTS.MINT.BUTTON.Disabled = true;
 					ELMTS.ALERT.innerHTML = `<p class="form-control alert-warning">You don't have enough ETH to get juiced.</p>`;
 				}
 			});
 	}
 
 	let mintPineapples = () => {
-		ELMTS.MINT.BUTTON.disable();
+		ELMTS.MINT.BUTTON.Disabled = true;
 		ELMTS.ALERT.innerHTML = `<p class="form-control alert-info">Your transaction is processing, please wait...</p>`;
 		return pineapplesContract.methods.mintPineapples(num)
 			.send({
@@ -80,11 +80,11 @@ window.addEventListener('DOMContentLoaded', () => {
 				value: web3js.utils.toWei('0.02', 'ether')
 			})
 			.on('receipt', receipt => {
-				ELMTS.MINT.BUTTON.enable();
+				ELMTS.MINT.BUTTON.Disabled = false;
 				ELMTS.ALERT.innerHTML = `<p class="form-control alert-success">Congratulations! You just got juiced!</p>`;
 			})
 			.on('error', error => {
-				ELMTS.MINT.BUTTON.enable();
+				ELMTS.MINT.BUTTON.Disabled = false;
 				ELMTS.ALERT.innerHTML = `<p class="form-control alert-danger">Something went wrong, we couldn't juice you.</p>`;
 			});
 	}
