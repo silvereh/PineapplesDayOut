@@ -87,6 +87,10 @@
 			h3 {
 				font-size: 18px;
 			}
+			label {
+				font-size: 1.2em;
+				font-weight: 600;
+			}
 			.btn {
 				background-color: #ffffa0;
 				border: 2px solid #613613;
@@ -102,14 +106,24 @@
 				max-width: 100%;
 				max-height: 150px;
 			}
+			.mint-form {
+				background-color: #ffffa0;
+				border: 1px solid #613613;
+				border-radius: 4px;
+				box-shadow: .5rem .5rem .5rem rgba(0,0,0,50%);
+				padding: 20px 30px;
+			}
 			.btn-mint {
 				background-color: #613613;
 				color: #ffffa0;
 				font-size: 1.5em;
 				margin-top: 1em;
 			}
-			.btn-mint:hover,
-			.btn-mint:focus {
+			.btn-mint[disabled] {
+				opacity: 85%;
+			}
+			.btn-mint:not([disabled]):hover,
+			.btn-mint:not([disabled]):focus {
 				background-color: #ffffa0;
 				color: #613613;
 			}
@@ -359,10 +373,42 @@
 		</header>
 		<section class="home text-center d-flex" id="home">
 			<div class="home-wrap">
+				<div id="alert"></div>
 				<h1 class="sr-only">Pineapples Day Out</h1>
 				<img class="logo" src="Logo.png" alt="Pineapples Day Out" aria-hidden="true" >
-				<div>
-					<button class="btn btn-mint">Coming Soon</button>
+				<div class="text-center">
+					<form class="mint-form" id="mint-form" style="display: none;">
+						<label class="d-block" >Mint your pineapples here, there are only <span id="pineapples-remaining">5000</span> pineapples left.<br>
+							<select class="form-control" name="pineapples-quantity" id="pineapples-quantity">
+								<option selected>Select a number of pineapples to mint</option>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+								<option value="6">6</option>
+								<option value="7">7</option>
+								<option value="8">8</option>
+								<option value="9">9</option>
+								<option value="10">10</option>
+								<option value="11">11</option>
+								<option value="12">12</option>
+								<option value="13">13</option>
+								<option value="14">14</option>
+								<option value="15">15</option>
+								<option value="16">16</option>
+								<option value="17">17</option>
+								<option value="18">18</option>
+								<option value="19">19</option>
+								<option value="20">20</option>
+							</select>
+						</label>
+						<label class="d-block">
+							You will pay <span id="pineapples-price">0.000</span> ETH for this transaction.
+						</label>
+						<button class="btn btn-mint" id="mint-button">Mint Now</button>
+					</form>
+					<button class="btn btn-mint" disabled>Coming Soon</button>
 				</div>
 			</div>
 		</section>
@@ -462,6 +508,8 @@
 				© Copyright Pineapples Day Out 2021
 			</div>
 		</footer>
+		<script src="./web3/pineapples_abi.js"></script>
+		<script src="./web3/pineapples.js"></script>
 		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
