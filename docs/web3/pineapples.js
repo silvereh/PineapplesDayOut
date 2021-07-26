@@ -1,4 +1,18 @@
 window.addEventListener('DOMContentLoaded', () => {
+	// A Web3Provider wraps a standard Web3 provider, which is what Metamask injects as window.ethereum into each page
+	const PROVIDER = new ethers.providers.Web3Provider(window.ethereum, "any");
+	// Force page refreshes on network changes
+	PROVIDER.on("network", (newNetwork, oldNetwork) => {
+		// When a Provider makes its initial connection, it emits a "network"
+		// event with a null oldNetwork along with the newNetwork. So, if the
+		// oldNetwork exists, it represents a changing network
+		if (oldNetwork) {
+			window.location.reload();
+		}
+	});
+	// The Metamask plugin also allows signing transactions to send ether and pay to change state within the blockchain.
+	// For this, you need the account signer...
+	const SIGNER = PROVIDER.getSigner();
 	const ELMTS = {
 		ALERT: document.getElementById('alert'),
 		COMING: document.getElementById('coming'),
@@ -14,23 +28,26 @@ window.addEventListener('DOMContentLoaded', () => {
 	}
 	let pineapplesContract;
 	let userAccount;
+	let accountBalance;
+	let totalPrice;
 
 	ELMTS.PINEAPPLES.REMAINING.innerHTML = `${new Intl.NumberFormat().format(5000)}`;
 
 	let salesOpen = () => {
-		return pineapplesContract.methods.saleIsActive.call();
+		return pineapplesContract.saleIsActive;
 	}
 
 	let totalSupply = () => {
-		return pineapplesContract.methods.totalSupply().call();
+		return pineapplesContract.totalSupply();
 	}
 
 	let getPrice = () => {
-		return pineapplesContract.methods.price.call();
+		return pineapplesContract.price;
 	}
 
 	let startApp = () => {
-		pineapplesContract = new web3js.eth.Contract(PINEAPPLES_ABI, PINEAPPLES_ADDRESS);
+		pineapplesContract = new ethers.Contract(PINEAPPLES_ABI, PINEAPPLES_ADDRESS, PROVIDER);
+
 		if (salesOpen()) {
 			ELMTS.MINT.FORM.Display = 'block';
 			ELMTS.COMING.Display = 'none';
@@ -40,9 +57,18 @@ window.addEventListener('DOMContentLoaded', () => {
 
 		let accountInterval = setInterval(() => {
 			// Check if account has changed
-			if (web3.eth.accounts[0] !== userAccount) {
-				userAccount = web3.eth.accounts[0];
-			}
+			SIGNER.getAddress()
+				.on('receipt', receipt => {
+					if receipt !== userAccount {
+						userAccount = receipt;
+					}
+				});
+
+			userAccount.getBalance()
+				.on('receipt', receipt => {
+					accountBalance = receipt;
+				});
+
 			// Refresh pineapples left
 			ELMTS.PINEAPPLES.REMAINING.innerText = `${new Intl.NumberFormat().format(MAX_SUPPLY - totalSupply())}`;
 			updatePrice();
@@ -57,14 +83,15 @@ window.addEventListener('DOMContentLoaded', () => {
 			return;
 		}
 
-		let total = num * getPrice();
-		ELMTS.PINEAPPLES.PRICE.innerHTML = `${total.toPrecision(3)}`;
+		totalPrice = num * getPrice();
+		ELMTS.PINEAPPLES.PRICE.innerHTML = `${totalPrice.toPrecision(3)}`;
 	}
 
 	let checkBalance = () => {
-		return web3.eth.getBalance(userAccount)
+		return PROVIDER.getBalance(userAccount)
 			.on('receipt', receipt => {
-				if (receipt <= parseFloat(ELMTS.PINEAPPLES.PRICE.innerText)) {
+				accountBalance = receipt;
+				if (formatUnits(accountBalance) <= parseFloat(ELMTS.PINEAPPLES.PRICE.innerText)) {
 					ELMTS.MINT.BUTTON.Disabled = true;
 					ELMTS.ALERT.innerHTML = `<p class="form-control alert-warning">You don't have enough ETH to get juiced.</p>`;
 				}
@@ -74,10 +101,10 @@ window.addEventListener('DOMContentLoaded', () => {
 	let mintPineapples = () => {
 		ELMTS.MINT.BUTTON.Disabled = true;
 		ELMTS.ALERT.innerHTML = `<p class="form-control alert-info">Your transaction is processing, please wait...</p>`;
-		return pineapplesContract.methods.mintPineapples(num)
+		return pineapplesContract.mintPineapples(num)
 			.send({
 				from: userAccount,
-				value: web3js.utils.toWei('0.02', 'ether')
+				value: 
 			})
 			.on('receipt', receipt => {
 				ELMTS.MINT.BUTTON.Disabled = false;
@@ -89,12 +116,8 @@ window.addEventListener('DOMContentLoaded', () => {
 			});
 	}
 
-	console.log(web3);
-	if (typeof web3 !== 'undefined') {
 	// if (typeof web3 !== 'undefined') {
-		web3js = new Web3(web3.currentProvider);
-	}
-	else {
+	if (typeof window.ethereum === 'undefined') {
 		ELMTS.ALERT.innerHTML = `<p class="form-control alert-info">Please, <a href="https://metamask.io/download.html" target="_blank" rel="noopener">install MetaMask extention</a> to continue.</p>`;
 	}
 
