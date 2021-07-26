@@ -59,7 +59,7 @@ window.addEventListener('DOMContentLoaded', () => {
 			// Check if account has changed
 			SIGNER.getAddress()
 				.on('receipt', receipt => {
-					if receipt !== userAccount {
+					if (receipt !== userAccount) {
 						userAccount = receipt;
 					}
 				});
