@@ -30,7 +30,7 @@ window.addEventListener('DOMContentLoaded', () => {
 	}
 
 	let startApp = () => {
-		pineapplesContract = web3js.eth.Contract(PINEAPPLES_ABI, PINEAPPLES_ADDRESS);
+		pineapplesContract = new web3js.eth.Contract(PINEAPPLES_ABI, PINEAPPLES_ADDRESS);
 		if (salesOpen()) {
 			ELMTS.MINT.FORM.Display = 'block';
 			ELMTS.COMING.Display = 'none';
@@ -92,7 +92,9 @@ window.addEventListener('DOMContentLoaded', () => {
 			});
 	}
 
+	console.log(web3);
 	if (typeof web3 !== 'undefined') {
+	// if (typeof web3 !== 'undefined') {
 		web3js = new Web3(web3.currentProvider);
 	}
 	else {
