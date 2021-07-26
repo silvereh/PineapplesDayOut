@@ -1,6 +1,7 @@
 window.addEventListener('DOMContentLoaded', () => {
 	const ELMTS = {
 		ALERT: document.getElementById('alert'),
+		COMING: document.getElementById('coming'),
 		MINT: {
 			BUTTON: document.getElementById('mint-button'),
 			FORM: document.getElementById('mint-form'),
@@ -32,7 +33,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		pineapplesContract = web3js.eth.Contract(PINEAPPLES_ABI, PINEAPPLES_ADDRESS);
 		if (salesOpen()) {
 			ELMTS.MINT.FORM.Display = 'block';
-			ELMTS.MINT.BUTTON.innerText = 'Mint'
+			ELMTS.COMING.Display = 'none';
 			ELMTS.MINT.BUTTON.enable();
 			ELMTS.PINEAPPLES.REMAINING.innerText = `${new Intl.NumberFormat().format(MAX_SUPPLY - totalSupply())}`;
 		}
@@ -44,6 +45,7 @@ window.addEventListener('DOMContentLoaded', () => {
 			}
 			// Refresh pineapples left
 			ELMTS.PINEAPPLES.REMAINING.innerText = `${new Intl.NumberFormat().format(MAX_SUPPLY - totalSupply())}`;
+			updatePrice();
 		}, 100);
 	}
 
@@ -98,4 +100,12 @@ window.addEventListener('DOMContentLoaded', () => {
 	}
 
 	startApp();
+
+	document.addEventListener('click', event => {
+		event.preventDefault();
+		let target = event.target;
+		if (target == ELMTS.MINT.BUTTON) {
+			mintPineapples();
+		}
+	});
 });
