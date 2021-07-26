@@ -18,7 +18,7 @@ window.addEventListener('DOMContentLoaded', () => {
 	ELMTS.PINEAPPLES.REMAINING.innerHTML = `${new Intl.NumberFormat().format(5000)}`;
 
 	let salesOpen = () => {
-		return pineapplesContract.methods.saleIsActive().call();
+		return pineapplesContract.methods.saleIsActive.call();
 	}
 
 	let totalSupply = () => {
