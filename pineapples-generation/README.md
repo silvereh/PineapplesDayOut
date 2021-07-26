@@ -33,7 +33,7 @@ The script is programmed to function with the following directory structure:
 	- fw
 	- mo
 	- sk
-	- output
+- _output
 ```
 
 ## Filename conventions

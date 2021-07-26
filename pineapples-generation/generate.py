@@ -421,8 +421,43 @@ for item in traits:
 	item["Name"] = "Pineapple #" + str(i)
 	i = i + 1
 
+# Get counts for each trait
+counts = {}
+counts["Background"] = {}
+for item in bg:
+	counts["Background"][item] = 0
+counts["skin"] = {}
+for item in sk:
+	counts["skin"][item] = 0
+counts["Mouth"] = {}
+for item in ey:
+	counts["Mouth"][item] = 0
+counts["Eyes"] = {}
+for item in cr:
+	counts["Eyes"][item] = 0
+counts["Crown"] = {}
+for item in mo:
+	counts["Crown"][item] = 0
+counts["Footwear"] = {}
+for item in fw:
+	counts["Footwear"][item] = 0
+counts["Accessories"] = {}
+for item in ac:
+	counts["Accessories"][item] = 0
+
+for pineapple in traits:
+	counts["Background"][pineapple["Background"]] += 1
+	counts["skin"][pineapple["skin"]] += 1
+	counts["Mouth"][pineapple["Mouth"]] += 1
+	counts["Eyes"][pineapple["Eyes"]] += 1
+	counts["Crown"][pineapple["Crown"]] += 1
+	counts["Footwear"][pineapple["Footwear"]] += 1
+	counts["Accessories"][pineapple["Accessories"]] += 1
+with open("./_output/traitscount.json", "w") as of:
+	json.dump(counts, of, indent=2)
+
 # Write Metadata to json
-with open("./_assets/metadata.json", "w") as of:
+with open("./_output/metadata.json", "w") as of:
 	json.dump(traits, of, indent=2)
 
 # Generate images
@@ -489,6 +524,6 @@ for item in traits:
 
 	# Save file
 	filename = str(i) + ".jpg"
-	result.save("./_assets/output/" + filename)
+	result.save("./_output/" + filename)
 	print(f'{str(i)} done')
 	i = i + 1

@@ -2,4 +2,5 @@
 .DS_Store
 Thumbs.db
 pineapples-generation/_assets/
+pineapples-generation/_output/
 .contract
