@@ -1,4 +1,4 @@
-import { ethers } from "https://cdn.jsdelivr.net/npm/ethers@5.4.1/lib/index.min.js";
+// import { ethers } from "./ethers_5_2.min.js";
 
 window.addEventListener('DOMContentLoaded', () => {
 	// A Web3Provider wraps a standard Web3 provider, which is what Metamask injects as window.ethereum into each page
