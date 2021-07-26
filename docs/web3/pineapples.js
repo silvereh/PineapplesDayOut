@@ -1,3 +1,5 @@
+import { ethers } from "https://cdn.ethers.io/lib/ethers-5.1.esm.min.js";
+
 window.addEventListener('DOMContentLoaded', () => {
 	const MAX_SUPPLY = 5000;
 	const PINEAPPLES_ADDRESS = "0xad548be055e0b86f1b2a3036387f4378df3fedbb";
