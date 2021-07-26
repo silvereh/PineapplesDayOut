@@ -27,6 +27,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		}
 	}
 	let pineapplesContract;
+	let pineapplesMinter;
 	let userAccount;
 	let accountBalance;
 	let totalPrice;
@@ -84,7 +85,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		}
 
 		totalPrice = num * getPrice();
-		ELMTS.PINEAPPLES.PRICE.innerHTML = `${totalPrice.toPrecision(3)}`;
+		ELMTS.PINEAPPLES.PRICE.innerHTML = `${formatUnits(totalPrice).toPrecision(3)}`;
 	}
 
 	let checkBalance = () => {
@@ -99,13 +100,10 @@ window.addEventListener('DOMContentLoaded', () => {
 	}
 
 	let mintPineapples = () => {
+		pineapplesMinter = pineapplesContract.connect(SIGNER);
 		ELMTS.MINT.BUTTON.Disabled = true;
 		ELMTS.ALERT.innerHTML = `<p class="form-control alert-info">Your transaction is processing, please wait...</p>`;
-		return pineapplesContract.mintPineapples(num)
-			.send({
-				from: userAccount,
-				value: 
-			})
+		return pineapplesMinter.mintPineapples(num, value = totalPrice)
 			.on('receipt', receipt => {
 				ELMTS.MINT.BUTTON.Disabled = false;
 				ELMTS.ALERT.innerHTML = `<p class="form-control alert-success">Congratulations! You just got juiced!</p>`;
