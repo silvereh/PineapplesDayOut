@@ -1,8 +1,28 @@
 const MAX_SUPPLY = 5000;
-const PINEAPPLES_ADDRESS = "0x22e1fe9f1c8642fddabd6eb921211eebf1268bbe";
+const PINEAPPLES_ADDRESS = "0xad548be055e0b86f1b2a3036387f4378df3fedbb";
 const PINEAPPLES_ABI = [
 		{
 			"inputs": [
+				{
+					"internalType": "address",
+					"name": "_t1",
+					"type": "address"
+				},
+				{
+					"internalType": "address",
+					"name": "_t2",
+					"type": "address"
+				},
+				{
+					"internalType": "address",
+					"name": "_t3",
+					"type": "address"
+				},
+				{
+					"internalType": "address",
+					"name": "_t4",
+					"type": "address"
+				},
 				{
 					"internalType": "string",
 					"name": "baseURI",
@@ -108,38 +128,12 @@ const PINEAPPLES_ABI = [
 		},
 		{
 			"inputs": [],
-			"name": "_price",
-			"outputs": [
-				{
-					"internalType": "uint256",
-					"name": "",
-					"type": "uint256"
-				}
-			],
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"inputs": [],
 			"name": "_reserve",
 			"outputs": [
 				{
 					"internalType": "uint256",
 					"name": "",
 					"type": "uint256"
-				}
-			],
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"inputs": [],
-			"name": "_saleIsActive",
-			"outputs": [
-				{
-					"internalType": "bool",
-					"name": "",
-					"type": "bool"
 				}
 			],
 			"stateMutability": "view",
@@ -349,6 +343,19 @@ const PINEAPPLES_ABI = [
 		},
 		{
 			"inputs": [],
+			"name": "price",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
 			"name": "renounceOwnership",
 			"outputs": [],
 			"stateMutability": "nonpayable",
@@ -403,6 +410,19 @@ const PINEAPPLES_ABI = [
 			"name": "safeTransferFrom",
 			"outputs": [],
 			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "saleIsActive",
+			"outputs": [
+				{
+					"internalType": "bool",
+					"name": "",
+					"type": "bool"
+				}
+			],
+			"stateMutability": "view",
 			"type": "function"
 		},
 		{

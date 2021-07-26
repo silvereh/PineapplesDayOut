@@ -52,7 +52,7 @@ window.addEventListener('DOMContentLoaded', () => {
 	let updatePrice = () => {
 		let num = parseInt(ELMTS.PINEAPPLES.QUANTITY.value, 10);
 		if (num < 1 || num > 20) {
-			ELMTS.ALERT.innerHTML = `<p class="form-control alert-danger">Please, enter a valid amount of pineapples.</p>`;
+			ELMTS.ALERT.innerHTML = `<p class="form-control alert-danger">Please, enter a valid number of pineapples.</p>`;
 			ELMTS.MINT.BUTTON.enable();
 			return;
 		}
@@ -66,11 +66,8 @@ window.addEventListener('DOMContentLoaded', () => {
 			.on('receipt', receipt => {
 				if (receipt <= parseFloat(ELMTS.PINEAPPLES.PRICE.innerText)) {
 					ELMTS.MINT.BUTTON.disable();
-					ELMTS.ALERT.innerHTML = `<p class="form-control alert-warning">You don't have enough ETH to process this transaction.</p>`;
+					ELMTS.ALERT.innerHTML = `<p class="form-control alert-warning">You don't have enough ETH to get juiced.</p>`;
 				}
-			})
-			.on('error', error => {
-				ELMTS.ALERT.innerHTML = `<p class="form-control alert-info">Please, <a href="https://metamask.io/download.html" target="_blank" rel="noopener">install MetaMask extention</a> to continue.</p>`;
 			});
 	}
 
@@ -84,11 +81,11 @@ window.addEventListener('DOMContentLoaded', () => {
 			})
 			.on('receipt', receipt => {
 				ELMTS.MINT.BUTTON.enable();
-				ELMTS.ALERT.innerHTML = `<p class="form-control alert-success">Congratulations! You just got yourself some pineapples!</p>`;
+				ELMTS.ALERT.innerHTML = `<p class="form-control alert-success">Congratulations! You just got juiced!</p>`;
 			})
 			.on('error', error => {
 				ELMTS.MINT.BUTTON.enable();
-				ELMTS.ALERT.innerHTML = `<p class="form-control alert-danger">Something went wrong during transaction processing, we couldn't buy your pineapples.</p>`;
+				ELMTS.ALERT.innerHTML = `<p class="form-control alert-danger">Something went wrong, we couldn't juice you.</p>`;
 			});
 	}
 
