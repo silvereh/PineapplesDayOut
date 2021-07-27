@@ -40,7 +40,7 @@ let getSalesState = () => {
 			}
 			else {
 				document.getElementById(SELECTORS.MINT.FORM).style.display = 'none';
-				document.getElementById(SELECTORS.COMING).style.display = 'block';
+				document.getElementById(SELECTORS.COMING).style.display = 'inline';
 				document.getElementById(SELECTORS.MINT.BUTTON).Disabled = true;
 			}
 		});
