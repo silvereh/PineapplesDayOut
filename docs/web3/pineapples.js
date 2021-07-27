@@ -3,7 +3,7 @@ import { ethers } from "./ethers_5_2.min.js";
 window.addEventListener('DOMContentLoaded', () => {
 	const MAX_SUPPLY = 5000;
 	const PINEAPPLES_ADDRESS = "0xad548be055e0b86f1b2a3036387f4378df3fedbb";
-	const PINEAPPLES_ABI = `[
+	const PINEAPPLES_ABI = [
 		{
 			"inputs": [
 				{
@@ -659,7 +659,7 @@ window.addEventListener('DOMContentLoaded', () => {
 			"stateMutability": "nonpayable",
 			"type": "function"
 		}
-	]`;
+	];
 	// A Web3Provider wraps a standard Web3 provider, which is what Metamask injects as window.ethereum into each page
 	const PROVIDER = new ethers.providers.Web3Provider(window.ethereum, "any");
 	// Force page refreshes on network changes
@@ -708,7 +708,7 @@ window.addEventListener('DOMContentLoaded', () => {
 	}
 
 	let startApp = () => {
-		pineapplesContract = new ethers.Contract(PINEAPPLES_ABI, PINEAPPLES_ADDRESS, PROVIDER);
+		pineapplesContract = new ethers.Contract(JSON.stringify(PINEAPPLES_ABI), PINEAPPLES_ADDRESS, PROVIDER);
 
 		if (salesOpen()) {
 			ELMTS.MINT.FORM.Display = 'block';
