@@ -23,28 +23,21 @@ let provider;
 let signer;
 
 let salesOpen = () => {
-	return pineapplesContract.saleIsActive;
+	let result = pineapplesContract.saleIsActive;
+	console.log("SalesOpen: ", result);
+	return result;
 }
 
 let totalSupply = () => {
-	return pineapplesContract.totalSupply();
+	let result = pineapplesContract.totalSupply();
+	console.log("TotalSupply: ", result);
+	return result;
 }
 
 let getPrice = () => {
-	return pineapplesContract.price;
-}
-
-let startApp = () => {
-	pineapplesContract = new ethers.Contract(PINEAPPLES_ADDRESS, JSON.stringify(PINEAPPLES_ABI), provider);
-
-	let accountInterval = setInterval(() => {
-		if (salesOpen()) {
-			ELMTS.MINT.FORM.Display = 'block';
-			ELMTS.COMING.Display = 'none';
-			ELMTS.MINT.BUTTON.Disabled = false;
-			ELMTS.PINEAPPLES.REMAINING.innerText = `${new Intl.NumberFormat().format(MAX_SUPPLY - totalSupply())}`;
-		}
-	}, 1000);
+	result = pineapplesContract.price;
+	console.log("Price: ", result);
+	return result;
 }
 
 let updatePrice = () => {
@@ -63,6 +56,7 @@ let checkBalance = () => {
 	return provider.getBalance(userAccount)
 		.then(receipt => {
 			accountBalance = receipt;
+			console.log("AccountBalance: ", accountBalance);
 			if (formatUnits(accountBalance) <= parseFloat(ELMTS.PINEAPPLES.PRICE.innerText)) {
 				ELMTS.MINT.BUTTON.Disabled = true;
 				ELMTS.ALERT.innerHTML = `<p class="form-control alert-warning">You don't have enough ETH to get juiced.</p>`;
@@ -83,6 +77,19 @@ let mintPineapples = () => {
 			ELMTS.MINT.BUTTON.Disabled = false;
 			ELMTS.ALERT.innerHTML = `<p class="form-control alert-danger">Something went wrong, we couldn't juice you.</p>`;
 		});
+}
+
+let startApp = () => {
+	pineapplesContract = new ethers.Contract(PINEAPPLES_ADDRESS, JSON.stringify(PINEAPPLES_ABI), provider);
+
+	let accountInterval = setInterval(() => {
+		if (salesOpen()) {
+			ELMTS.MINT.FORM.Display = 'block';
+			ELMTS.COMING.Display = 'none';
+			ELMTS.MINT.BUTTON.Disabled = false;
+			ELMTS.PINEAPPLES.REMAINING.innerText = `${new Intl.NumberFormat().format(MAX_SUPPLY - totalSupply())}`;
+		}
+	}, 1000);
 }
 
 window.addEventListener('DOMContentLoaded', () => {
