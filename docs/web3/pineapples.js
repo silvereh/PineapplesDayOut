@@ -720,14 +720,14 @@ window.addEventListener('DOMContentLoaded', () => {
 		let accountInterval = setInterval(() => {
 			// Check if account has changed
 			SIGNER.getAddress()
-				.on('receipt', receipt => {
+				.then(receipt => {
 					if (receipt !== userAccount) {
 						userAccount = receipt;
 					}
 				});
 
 			userAccount.getBalance()
-				.on('receipt', receipt => {
+				.then(receipt => {
 					accountBalance = receipt;
 				});
 
@@ -751,7 +751,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	let checkBalance = () => {
 		return PROVIDER.getBalance(userAccount)
-			.on('receipt', receipt => {
+			.then(receipt => {
 				accountBalance = receipt;
 				if (formatUnits(accountBalance) <= parseFloat(ELMTS.PINEAPPLES.PRICE.innerText)) {
 					ELMTS.MINT.BUTTON.Disabled = true;
@@ -765,11 +765,11 @@ window.addEventListener('DOMContentLoaded', () => {
 		ELMTS.MINT.BUTTON.Disabled = true;
 		ELMTS.ALERT.innerHTML = `<p class="form-control alert-info">Your transaction is processing, please wait...</p>`;
 		return pineapplesMinter.mintPineapples(num, value = totalPrice)
-			.on('receipt', receipt => {
+			.then(receipt => {
 				ELMTS.MINT.BUTTON.Disabled = false;
 				ELMTS.ALERT.innerHTML = `<p class="form-control alert-success">Congratulations! You just got juiced!</p>`;
 			})
-			.on('error', error => {
+			.catch(error => {
 				ELMTS.MINT.BUTTON.Disabled = false;
 				ELMTS.ALERT.innerHTML = `<p class="form-control alert-danger">Something went wrong, we couldn't juice you.</p>`;
 			});
