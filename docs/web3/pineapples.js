@@ -67,7 +67,9 @@ let getPrice = () => {
 }
 
 let updatePrice = () => {
-	mintCount = parseInt(document.getElementById(SELECTORS.PINEAPPLES.QUANTITY).value, 10);
+	let pri = parseInt(document.getElementById(SELECTORS.PINEAPPLES.QUANTITY).value, 10);
+	console.log("Updated Price: ", pri);
+	mintCount = pri;
 }
 
 let checkBalance = () => {
