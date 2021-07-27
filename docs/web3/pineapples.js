@@ -62,7 +62,7 @@ let getPrice = () => {
 			console.log("UnitPrice: ", result);
 			unitPrice = result;
 			totalPrice = num * unitPrice;
-		document.getElementById(SELECTORS.PINEAPPLES.PRICE).innerHTML = `${formatUnits(totalPrice).toPrecision(3)}`;
+		document.getElementById(SELECTORS.PINEAPPLES.PRICE).innerHTML = `${ethers.utils.formatUnits(totalPrice).toPrecision(3)}`;
 	});
 }
 
@@ -127,7 +127,7 @@ window.addEventListener('DOMContentLoaded', () => {
 				return;
 			}
 			checkBalance();
-			if (formatUnits(accountBalance) <= parseFloat(document.getElementById(SELECTORS.PINEAPPLES.PRICE).innerText)) {
+			if (ethers.utils.formatUnits(accountBalance) <= parseFloat(document.getElementById(SELECTORS.PINEAPPLES.PRICE).innerText)) {
 				document.getElementById(SELECTORS.MINT.BUTTON).Disabled = true;
 				document.getElementById(SELECTORS.ALERT).innerHTML = `<p class="form-control alert-warning">You don't have enough ETH to get juiced.</p>`;
 				return;
@@ -145,7 +145,7 @@ window.addEventListener('DOMContentLoaded', () => {
 				document.getElementById(SELECTORS.MINT.BUTTON).Disabled = false;
 			}
 			checkBalance();
-			if (formatUnits(accountBalance) <= parseFloat(document.getElementById(SELECTORS.PINEAPPLES.PRICE).innerText)) {
+			if (ethers.utils.formatUnits(accountBalance) <= parseFloat(document.getElementById(SELECTORS.PINEAPPLES.PRICE).innerText)) {
 				document.getElementById(SELECTORS.MINT.BUTTON).Disabled = true;
 				document.getElementById(SELECTORS.ALERT).innerHTML = `<p class="form-control alert-warning">You don't have enough ETH to get juiced.</p>`;
 			}
