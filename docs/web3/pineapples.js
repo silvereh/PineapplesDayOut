@@ -1,4 +1,4 @@
-// import { ethers } from "https://cdn.ethers.io/lib/ethers-5.1.esm.min.js";
+import { ethers } from "./web3/ethers_5_2.min.js";
 
 window.addEventListener('DOMContentLoaded', () => {
 	const MAX_SUPPLY = 5000;
