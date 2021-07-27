@@ -117,9 +117,9 @@ window.addEventListener('DOMContentLoaded', () => {
 	startApp();
 
 	document.addEventListener('click', event => {
+		let target = event.target;
 		event.preventDefault();
 		console.log("Target: ", target);
-		let target = event.target;
 		if (target == document.getElementById(SELECTORS.MINT.BUTTON)) {
 			updatePrice();
 			if (mintCount < 1 || mintCount > 20) {
