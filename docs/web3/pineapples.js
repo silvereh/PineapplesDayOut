@@ -35,7 +35,8 @@ let getSalesState = () => {
 				ELMTS.MINT.FORM.Display = 'block';
 				ELMTS.COMING.Display = 'none';
 				ELMTS.MINT.BUTTON.Disabled = false;
-				ELMTS.PINEAPPLES.REMAINING.innerText = `${new Intl.NumberFormat().format(MAX_SUPPLY - totalSupply())}`;
+
+				getTotalSupply();
 			}
 		});
 }
@@ -45,6 +46,7 @@ let getTotalSupply = () => {
 		.then(result => {
 			console.log("TotalSupply: ", result);
 			totalSupply = result;
+			ELMTS.PINEAPPLES.REMAINING.innerText = `${new Intl.NumberFormat().format(MAX_SUPPLY - totalSupply)}`;
 		});
 }
 
