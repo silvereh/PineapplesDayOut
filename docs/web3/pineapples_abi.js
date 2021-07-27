@@ -657,3 +657,5 @@ const PINEAPPLES_ABI = [
 			"type": "function"
 		}
 	];
+
+export {MAX_SUPPLY, PINEAPPLES_ADDRESS, PINEAPPLES_ABI};
