@@ -660,20 +660,7 @@ window.addEventListener('DOMContentLoaded', () => {
 			"type": "function"
 		}
 	];
-	// A Web3Provider wraps a standard Web3 provider, which is what Metamask injects as window.ethereum into each page
-	const PROVIDER = new ethers.providers.Web3Provider(window.ethereum, "any");
-	// Force page refreshes on network changes
-	PROVIDER.on("network", (newNetwork, oldNetwork) => {
-		// When a Provider makes its initial connection, it emits a "network"
-		// event with a null oldNetwork along with the newNetwork. So, if the
-		// oldNetwork exists, it represents a changing network
-		if (oldNetwork) {
-			window.location.reload();
-		}
-	});
-	// The Metamask plugin also allows signing transactions to send ether and pay to change state within the blockchain.
-	// For this, you need the account signer...
-	const SIGNER = PROVIDER.getSigner();
+
 	const ELMTS = {
 		ALERT: document.getElementById('alert'),
 		COMING: document.getElementById('coming'),
@@ -693,6 +680,18 @@ window.addEventListener('DOMContentLoaded', () => {
 	let accountBalance;
 	let totalPrice;
 
+	let provider;
+	let signer;
+	if (typeof window.ethereum !== 'undefined') {
+		provider = new ethers.providers.Web3Provider(window.ethereum, "any");
+		// The Metamask plugin also allows signing transactions to send ether and pay to change state within the blockchain.
+		// For this, you need the account signer...
+		signer = provider.getSigner();
+	}
+	else {
+		ELMTS.ALERT.innerHTML = `<p class="form-control alert-info">Please, <a href="https://metamask.io/download.html" target="_blank" rel="noopener">install MetaMask extention</a> to continue.</p>`;
+	}
+
 	ELMTS.PINEAPPLES.REMAINING.innerHTML = `${new Intl.NumberFormat().format(5000)}`;
 
 	let salesOpen = () => {
@@ -708,33 +707,16 @@ window.addEventListener('DOMContentLoaded', () => {
 	}
 
 	let startApp = () => {
-		pineapplesContract = new ethers.Contract(PINEAPPLES_ADDRESS, JSON.stringify(PINEAPPLES_ABI), PROVIDER);
-
-		if (salesOpen()) {
-			ELMTS.MINT.FORM.Display = 'block';
-			ELMTS.COMING.Display = 'none';
-			ELMTS.MINT.BUTTON.Disabled = false;
-			ELMTS.PINEAPPLES.REMAINING.innerText = `${new Intl.NumberFormat().format(MAX_SUPPLY - totalSupply())}`;
-		}
+		pineapplesContract = new ethers.Contract(PINEAPPLES_ADDRESS, JSON.stringify(PINEAPPLES_ABI), provider);
 
 		let accountInterval = setInterval(() => {
-			// Check if account has changed
-			SIGNER.getAddress()
-				.then(receipt => {
-					if (receipt !== userAccount) {
-						userAccount = receipt;
-					}
-				});
-
-			userAccount.getBalance()
-				.then(receipt => {
-					accountBalance = receipt;
-				});
-
-			// Refresh pineapples left
-			ELMTS.PINEAPPLES.REMAINING.innerText = `${new Intl.NumberFormat().format(MAX_SUPPLY - totalSupply())}`;
-			updatePrice();
-		}, 100);
+			if (salesOpen()) {
+				ELMTS.MINT.FORM.Display = 'block';
+				ELMTS.COMING.Display = 'none';
+				ELMTS.MINT.BUTTON.Disabled = false;
+				ELMTS.PINEAPPLES.REMAINING.innerText = `${new Intl.NumberFormat().format(MAX_SUPPLY - totalSupply())}`;
+			}
+		}, 1000);
 	}
 
 	let updatePrice = () => {
@@ -750,7 +732,7 @@ window.addEventListener('DOMContentLoaded', () => {
 	}
 
 	let checkBalance = () => {
-		return PROVIDER.getBalance(userAccount)
+		return provider.getBalance(userAccount)
 			.then(receipt => {
 				accountBalance = receipt;
 				if (formatUnits(accountBalance) <= parseFloat(ELMTS.PINEAPPLES.PRICE.innerText)) {
@@ -761,7 +743,7 @@ window.addEventListener('DOMContentLoaded', () => {
 	}
 
 	let mintPineapples = () => {
-		pineapplesMinter = pineapplesContract.connect(SIGNER);
+		pineapplesMinter = pineapplesContract.connect(signer);
 		ELMTS.MINT.BUTTON.Disabled = true;
 		ELMTS.ALERT.innerHTML = `<p class="form-control alert-info">Your transaction is processing, please wait...</p>`;
 		return pineapplesMinter.mintPineapples(num, value = totalPrice)
@@ -773,11 +755,6 @@ window.addEventListener('DOMContentLoaded', () => {
 				ELMTS.MINT.BUTTON.Disabled = false;
 				ELMTS.ALERT.innerHTML = `<p class="form-control alert-danger">Something went wrong, we couldn't juice you.</p>`;
 			});
-	}
-
-	// if (typeof web3 !== 'undefined') {
-	if (typeof window.ethereum === 'undefined') {
-		ELMTS.ALERT.innerHTML = `<p class="form-control alert-info">Please, <a href="https://metamask.io/download.html" target="_blank" rel="noopener">install MetaMask extention</a> to continue.</p>`;
 	}
 
 	startApp();
@@ -794,6 +771,17 @@ window.addEventListener('DOMContentLoaded', () => {
 		let target = event.target;
 		if (target == ELMTS.PINEAPPLES.QUANTITY) {
 			updatePrice();
+			checkBalance();
+		}
+	});
+	// A Web3Provider wraps a standard Web3 provider, which is what Metamask injects as window.ethereum into each page
+	// Force page refreshes on network changes
+	provider.on("network", (newNetwork, oldNetwork) => {
+		// When a Provider makes its initial connection, it emits a "network"
+		// event with a null oldNetwork along with the newNetwork. So, if the
+		// oldNetwork exists, it represents a changing network
+		if (oldNetwork) {
+			window.location.reload();
 		}
 	});
 });
