@@ -708,7 +708,7 @@ window.addEventListener('DOMContentLoaded', () => {
 	}
 
 	let startApp = () => {
-		pineapplesContract = new ethers.Contract(JSON.stringify(PINEAPPLES_ABI), PINEAPPLES_ADDRESS, PROVIDER);
+		pineapplesContract = new ethers.Contract(PINEAPPLES_ADDRESS, JSON.stringify(PINEAPPLES_ABI), PROVIDER);
 
 		if (salesOpen()) {
 			ELMTS.MINT.FORM.Display = 'block';
