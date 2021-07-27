@@ -31,9 +31,9 @@ let getSalesState = () => {
 			console.log("SalesOpen: ", result);
 			salesOpen = result;
 
-			if (salesOpen) {
-				document.getElementById(SELECTORS.MINT.FORM).Display = 'block';
-				document.getElementById(SELECTORS.COMING).Display = 'none';
+			if (result) {
+				document.getElementById(SELECTORS.MINT.FORM).style.display = 'block';
+				document.getElementById(SELECTORS.COMING).style.display = 'none';
 				document.getElementById(SELECTORS.MINT.BUTTON).Disabled = false;
 
 				getTotalSupply();
