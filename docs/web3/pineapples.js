@@ -1,4 +1,4 @@
-import { ethers } from "./web3/ethers_5_2.min.js";
+import { ethers } from "./ethers_5_2.min.js";
 
 window.addEventListener('DOMContentLoaded', () => {
 	const MAX_SUPPLY = 5000;
