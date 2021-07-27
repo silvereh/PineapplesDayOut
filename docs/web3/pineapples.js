@@ -21,23 +21,41 @@ let accountBalance;
 let totalPrice;
 let provider;
 let signer;
+let salesOpen;
+let totalSupply;
+let unitPrice;
 
-let salesOpen = () => {
-	let result = pineapplesContract.saleIsActive;
-	console.log("SalesOpen: ", result);
-	return result;
+let getSalesState = () => {
+	return pineapplesContract.saleIsActive
+		.then(result => {
+			console.log("SalesOpen: ", result);
+			salesOpen = result;
+
+			if (salesOpen) {
+				ELMTS.MINT.FORM.Display = 'block';
+				ELMTS.COMING.Display = 'none';
+				ELMTS.MINT.BUTTON.Disabled = false;
+				ELMTS.PINEAPPLES.REMAINING.innerText = `${new Intl.NumberFormat().format(MAX_SUPPLY - totalSupply())}`;
+			}
+		});
 }
 
-let totalSupply = () => {
-	let result = pineapplesContract.totalSupply();
-	console.log("TotalSupply: ", result);
-	return result;
+let getTotalSupply = () => {
+	return pineapplesContract.totalSupply()
+		.then(result => {
+			console.log("TotalSupply: ", result);
+			totalSupply = result;
+		});
 }
 
 let getPrice = () => {
-	result = pineapplesContract.price;
-	console.log("Price: ", result);
-	return result;
+	return pineapplesContract.price
+		.then(result => {
+			console.log("UnitPrice: ", result);
+			unitPrice = result;
+			totalPrice = num * unitPrice;
+		ELMTS.PINEAPPLES.PRICE.innerHTML = `${formatUnits(totalPrice).toPrecision(3)}`;
+	});
 }
 
 let updatePrice = () => {
@@ -47,9 +65,6 @@ let updatePrice = () => {
 		ELMTS.MINT.BUTTON.Disabled = false;
 		return;
 	}
-
-	totalPrice = num * getPrice();
-	ELMTS.PINEAPPLES.PRICE.innerHTML = `${formatUnits(totalPrice).toPrecision(3)}`;
 }
 
 let checkBalance = () => {
@@ -83,12 +98,7 @@ let startApp = () => {
 	pineapplesContract = new ethers.Contract(PINEAPPLES_ADDRESS, JSON.stringify(PINEAPPLES_ABI), provider);
 
 	let accountInterval = setInterval(() => {
-		if (salesOpen()) {
-			ELMTS.MINT.FORM.Display = 'block';
-			ELMTS.COMING.Display = 'none';
-			ELMTS.MINT.BUTTON.Disabled = false;
-			ELMTS.PINEAPPLES.REMAINING.innerText = `${new Intl.NumberFormat().format(MAX_SUPPLY - totalSupply())}`;
-		}
+		getSalesState();
 	}, 1000);
 }
 
