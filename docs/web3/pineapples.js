@@ -38,6 +38,11 @@ let getSalesState = () => {
 
 				getTotalSupply();
 			}
+			else {
+				document.getElementById(SELECTORS.MINT.FORM).style.display = 'none';
+				document.getElementById(SELECTORS.COMING).style.display = 'block';
+				document.getElementById(SELECTORS.MINT.BUTTON).Disabled = true;
+			}
 		});
 }
 
