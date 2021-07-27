@@ -26,7 +26,7 @@ let totalSupply;
 let unitPrice;
 
 let getSalesState = () => {
-	return pineapplesContract.saleIsActive
+	return pineapplesContract.saleIsActive()
 		.then(result => {
 			console.log("SalesOpen: ", result);
 			salesOpen = result;
@@ -49,7 +49,7 @@ let getTotalSupply = () => {
 }
 
 let getPrice = () => {
-	return pineapplesContract.price
+	return pineapplesContract.price()
 		.then(result => {
 			console.log("UnitPrice: ", result);
 			unitPrice = result;
