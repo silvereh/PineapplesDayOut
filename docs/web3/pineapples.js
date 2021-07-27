@@ -24,6 +24,7 @@ let signer;
 let salesOpen;
 let totalSupply;
 let unitPrice;
+let mintCount = 0;
 
 let getSalesState = () => {
 	return pineapplesContract.saleIsActive()
@@ -66,12 +67,7 @@ let getPrice = () => {
 }
 
 let updatePrice = () => {
-	let num = parseInt(document.getElementById(SELECTORS.PINEAPPLES.QUANTITY).value, 10);
-	if (num < 1 || num > 20) {
-		document.getElementById(SELECTORS.ALERT).innerHTML = `<p class="form-control alert-danger">Please, enter a valid number of pineapples.</p>`;
-		document.getElementById(SELECTORS.MINT.BUTTON).Disabled = false;
-		return;
-	}
+	mintCount = parseInt(document.getElementById(SELECTORS.PINEAPPLES.QUANTITY).value, 10);
 }
 
 let checkBalance = () => {
@@ -79,10 +75,6 @@ let checkBalance = () => {
 		.then(receipt => {
 			accountBalance = receipt;
 			console.log("AccountBalance: ", accountBalance);
-			if (formatUnits(accountBalance) <= parseFloat(document.getElementById(SELECTORS.PINEAPPLES.PRICE).innerText)) {
-				document.getElementById(SELECTORS.MINT.BUTTON).Disabled = true;
-				document.getElementById(SELECTORS.ALERT).innerHTML = `<p class="form-control alert-warning">You don't have enough ETH to get juiced.</p>`;
-			}
 		});
 }
 
@@ -128,6 +120,18 @@ window.addEventListener('DOMContentLoaded', () => {
 		event.preventDefault();
 		let target = event.target;
 		if (target == document.getElementById(SELECTORS.MINT.BUTTON)) {
+			updatePrice();
+			if (mintCount < 1 || mintCount > 20) {
+				document.getElementById(SELECTORS.ALERT).innerHTML = `<p class="form-control alert-danger">Please, enter a valid number of pineapples.</p>`;
+				document.getElementById(SELECTORS.MINT.BUTTON).Disabled = false;
+				return;
+			}
+			checkBalance();
+			if (formatUnits(accountBalance) <= parseFloat(document.getElementById(SELECTORS.PINEAPPLES.PRICE).innerText)) {
+				document.getElementById(SELECTORS.MINT.BUTTON).Disabled = true;
+				document.getElementById(SELECTORS.ALERT).innerHTML = `<p class="form-control alert-warning">You don't have enough ETH to get juiced.</p>`;
+				return;
+			}
 			mintPineapples();
 		}
 	});
@@ -136,7 +140,15 @@ window.addEventListener('DOMContentLoaded', () => {
 		let target = event.target;
 		if (target == document.getElementById(SELECTORS.PINEAPPLES.QUANTITY)) {
 			updatePrice();
+			if (mintCount < 1 || mintCount > 20) {
+				document.getElementById(SELECTORS.ALERT).innerHTML = `<p class="form-control alert-danger">Please, enter a valid number of pineapples.</p>`;
+				document.getElementById(SELECTORS.MINT.BUTTON).Disabled = false;
+			}
 			checkBalance();
+			if (formatUnits(accountBalance) <= parseFloat(document.getElementById(SELECTORS.PINEAPPLES.PRICE).innerText)) {
+				document.getElementById(SELECTORS.MINT.BUTTON).Disabled = true;
+				document.getElementById(SELECTORS.ALERT).innerHTML = `<p class="form-control alert-warning">You don't have enough ETH to get juiced.</p>`;
+			}
 		}
 	});
 	// A Web3Provider wraps a standard Web3 provider, which is what Metamask injects as window.ethereum into each page
