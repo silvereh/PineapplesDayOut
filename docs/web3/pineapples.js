@@ -1,19 +1,6 @@
 import { ethers } from "./ethers_5_2.min.js";
 import { MAX_SUPPLY, PINEAPPLES_ADDRESS, PINEAPPLES_ABI } from "./pineapples_abi.js";
 
-const ELMTS = {
-	ALERT: document.getElementById('alert'),
-	COMING: document.getElementById('coming'),
-	MINT: {
-		BUTTON: document.getElementById('mint-button'),
-		FORM: document.getElementById('mint-form'),
-	},
-	PINEAPPLES: {
-		REMAINING: document.getElementById('pineapples-remaining'),
-		QUANTITY: document.getElementById('pineapples-quantity'),
-		PRICE: document.getElementById('pineapples-price'),
-	}
-}
 let pineapplesContract;
 let pineapplesMinter;
 let userAccount;
@@ -105,6 +92,20 @@ let startApp = () => {
 }
 
 window.addEventListener('DOMContentLoaded', () => {
+	const ELMTS = {
+		ALERT: document.getElementById('alert'),
+		COMING: document.getElementById('coming'),
+		MINT: {
+			BUTTON: document.getElementById('mint-button'),
+			FORM: document.getElementById('mint-form'),
+		},
+		PINEAPPLES: {
+			REMAINING: document.getElementById('pineapples-remaining'),
+			QUANTITY: document.getElementById('pineapples-quantity'),
+			PRICE: document.getElementById('pineapples-price'),
+		}
+	}
+
 	ELMTS.PINEAPPLES.REMAINING.innerHTML = `${new Intl.NumberFormat().format(5000)}`;
 	if (typeof window.ethereum !== 'undefined') {
 		provider = new ethers.providers.Web3Provider(window.ethereum, "any");
