@@ -62,8 +62,8 @@ let getPrice = () => {
 			console.log("UnitPrice: ", result);
 			unitPrice = result;
 			totalPrice = num * unitPrice;
-		document.getElementById(SELECTORS.PINEAPPLES.PRICE).innerHTML = `${ethers.utils.formatUnits(totalPrice).toPrecision(3)}`;
-	});
+			document.getElementById(SELECTORS.PINEAPPLES.PRICE).innerHTML = `${ethers.utils.formatUnits(totalPrice).toPrecision(3)}`;
+		});
 }
 
 let updatePrice = () => {
@@ -118,6 +118,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	document.addEventListener('click', event => {
 		event.preventDefault();
+		console.log("Target: ", target);
 		let target = event.target;
 		if (target == document.getElementById(SELECTORS.MINT.BUTTON)) {
 			updatePrice();
