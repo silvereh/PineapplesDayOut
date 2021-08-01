@@ -16,7 +16,7 @@ const SELECTORS = {
 }
 let pineapplesContract;
 let pineapplesMinter;
-let userAccount;
+// let userAccount;
 let accountBalance;
 let totalPrice;
 let provider;
@@ -24,12 +24,12 @@ let signer;
 let salesOpen;
 let totalSupply;
 let unitPrice;
-let mintCount = 0;
+let quantity = 0;
 
 let getSalesState = () => {
 	return pineapplesContract.saleIsActive()
 		.then(result => {
-			console.log("SalesOpen: ", result);
+			// console.log("SalesOpen: ", result);
 			salesOpen = result;
 
 			if (result) {
@@ -50,7 +50,7 @@ let getSalesState = () => {
 let getTotalSupply = () => {
 	return pineapplesContract.totalSupply()
 		.then(result => {
-			console.log("TotalSupply: ", result);
+			// console.log("TotalSupply: ", result);
 			totalSupply = result;
 			document.getElementById(SELECTORS.PINEAPPLES.REMAINING).innerText = `${new Intl.NumberFormat().format(MAX_SUPPLY - totalSupply)}`;
 		});
@@ -67,16 +67,16 @@ let getPrice = () => {
 }
 
 let updatePrice = () => {
-	let pri = parseInt(document.getElementById(SELECTORS.PINEAPPLES.QUANTITY).value, 10);
-	console.log("Updated Price: ", pri);
-	mintCount = pri;
+	let qty = parseInt(document.getElementById(SELECTORS.PINEAPPLES.QUANTITY).value, 10);
+	console.log("Quantity: ", qty);
+	quantity = qty;
 }
 
 let checkBalance = () => {
-	return provider.getBalance(userAccount)
+	return signer.getBalance()
 		.then(receipt => {
+			console.log("AccountBalance: ", receipt);
 			accountBalance = receipt;
-			console.log("AccountBalance: ", accountBalance);
 		});
 }
 
@@ -121,36 +121,39 @@ window.addEventListener('DOMContentLoaded', () => {
 	document.addEventListener('click', event => {
 		let target = event.target;
 		event.preventDefault();
-		console.log("Target: ", target);
+		console.log("Click Target: ", target);
 		if (target == document.getElementById(SELECTORS.MINT.BUTTON)) {
 			updatePrice();
-			if (mintCount < 1 || mintCount > 20) {
+			if (quantity < 1 || quantity > 20) {
 				document.getElementById(SELECTORS.ALERT).innerHTML = `<p class="form-control alert-danger">Please, enter a valid number of pineapples.</p>`;
-				document.getElementById(SELECTORS.MINT.BUTTON).Disabled = false;
+				document.getElementById(SELECTORS.MINT.BUTTON).Disabled = true;
 				return;
 			}
 			checkBalance();
+			console.log("PRICE ELMT: ", document.getElementById(SELECTORS.PINEAPPLES.PRICE));
 			if (ethers.utils.formatUnits(accountBalance) <= parseFloat(document.getElementById(SELECTORS.PINEAPPLES.PRICE).innerText)) {
-				document.getElementById(SELECTORS.MINT.BUTTON).Disabled = true;
 				document.getElementById(SELECTORS.ALERT).innerHTML = `<p class="form-control alert-warning">You don't have enough ETH to get juiced.</p>`;
+				document.getElementById(SELECTORS.MINT.BUTTON).Disabled = true;
 				return;
 			}
 			mintPineapples();
 		}
 	});
 	document.addEventListener('change', event => {
-		event.preventDefault();
 		let target = event.target;
+		event.preventDefault();
+		console.log("Change Target: ", target);
 		if (target == document.getElementById(SELECTORS.PINEAPPLES.QUANTITY)) {
 			updatePrice();
-			if (mintCount < 1 || mintCount > 20) {
+			if (quantity < 1 || quantity > 20) {
 				document.getElementById(SELECTORS.ALERT).innerHTML = `<p class="form-control alert-danger">Please, enter a valid number of pineapples.</p>`;
-				document.getElementById(SELECTORS.MINT.BUTTON).Disabled = false;
+				document.getElementById(SELECTORS.MINT.BUTTON).Disabled = true;
 			}
 			checkBalance();
+			console.log("PRICE ELMT: ", document.getElementById(SELECTORS.PINEAPPLES.PRICE));
 			if (ethers.utils.formatUnits(accountBalance) <= parseFloat(document.getElementById(SELECTORS.PINEAPPLES.PRICE).innerText)) {
-				document.getElementById(SELECTORS.MINT.BUTTON).Disabled = true;
 				document.getElementById(SELECTORS.ALERT).innerHTML = `<p class="form-control alert-warning">You don't have enough ETH to get juiced.</p>`;
+				document.getElementById(SELECTORS.MINT.BUTTON).Disabled = true;
 			}
 		}
 	});

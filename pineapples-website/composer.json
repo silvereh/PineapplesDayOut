@@ -1,0 +1,22 @@
+{
+    "name": "pineapplesdayout/pineapplesdayout_com",
+    "description": "pineapplesdayout.com",
+    "version": "0.1.0",
+    "type": "library",
+    "license": "All Rights Reserved (c)",
+    "authors": [
+        {
+            "name": "Silvere Heraudeau",
+            "email": "silvere.heraudeau@gmail.com"
+        },
+        {
+            "name": "Chris Esquibel",
+            "email": "c.esquibel@herodev.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "sc0Vu/web3.php": "dev-master"
+    }
+}
+

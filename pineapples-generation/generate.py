@@ -391,7 +391,7 @@ def createSet():
 	trait = {}
 
 	trait["Background"] = random.choices(bg, bg_weight)[0]
-	trait["skin"] = random.choices(sk, sk_weight)[0]
+	trait["Skin"] = random.choices(sk, sk_weight)[0]
 	trait["Mouth"] = random.choices(mo, mo_weight)[0]
 	trait["Eyes"] = random.choices(ey, ey_weight)[0]
 	trait["Crown"] = random.choices(cr, cr_weight)[0]
@@ -426,17 +426,17 @@ counts = {}
 counts["Background"] = {}
 for item in bg:
 	counts["Background"][item] = 0
-counts["skin"] = {}
+counts["Skin"] = {}
 for item in sk:
-	counts["skin"][item] = 0
+	counts["Skin"][item] = 0
 counts["Mouth"] = {}
-for item in ey:
+for item in mo:
 	counts["Mouth"][item] = 0
 counts["Eyes"] = {}
-for item in cr:
+for item in ey:
 	counts["Eyes"][item] = 0
 counts["Crown"] = {}
-for item in mo:
+for item in cr:
 	counts["Crown"][item] = 0
 counts["Footwear"] = {}
 for item in fw:
@@ -447,17 +447,17 @@ for item in ac:
 
 for pineapple in traits:
 	counts["Background"][pineapple["Background"]] += 1
-	counts["skin"][pineapple["skin"]] += 1
+	counts["Skin"][pineapple["Skin"]] += 1
 	counts["Mouth"][pineapple["Mouth"]] += 1
 	counts["Eyes"][pineapple["Eyes"]] += 1
 	counts["Crown"][pineapple["Crown"]] += 1
 	counts["Footwear"][pineapple["Footwear"]] += 1
 	counts["Accessories"][pineapple["Accessories"]] += 1
-with open("./_output/traitscount.json", "w") as of:
+with open("./_output/metadata/traitscount.json", "w") as of:
 	json.dump(counts, of, indent=2)
 
 # Write Metadata to json
-with open("./_output/metadata.json", "w") as of:
+with open("./_output/metadata/traits.json", "w") as of:
 	json.dump(traits, of, indent=2)
 
 # Generate images
@@ -524,6 +524,6 @@ for item in traits:
 
 	# Save file
 	filename = str(i) + ".jpg"
-	result.save("./_output/" + filename)
+	result.save("./_output/images/" + filename)
 	print(f'{str(i)} done')
 	i = i + 1
