@@ -1,11 +1,11 @@
 body {
-	background: #ffffa0 url("../assets/Background.jpeg") center top repeat fixed;
+	background: #ffffa0 url("/assets/Background.jpeg") center top repeat fixed;
 	color: #613613;
 	font-family: Arial;
 	position: relative;
 }
 header {
-	background: #ffffa0 url("../assets/Background.jpeg") center top repeat fixed;
+	background: #ffffa0 url("/assets/Background.jpeg") center top repeat fixed;
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -16,7 +16,7 @@ header {
 	z-index: 12;
 }
 footer {
-	background: #ffffa0 url("../assets/Background.jpeg") center top repeat fixed;
+	background: #ffffa0 url("/assets/Background.jpeg") center top repeat fixed;
 	position: fixed;
 	bottom: 0;
 	left: 0;

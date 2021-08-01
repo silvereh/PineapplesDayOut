@@ -4,7 +4,7 @@
 	<div class="home-wrap">
 		<div id="alert"></div>
 		<h1 class="sr-only">Pineapples Day Out</h1>
-		<img class="logo" src="./assets/Logo.png" alt="Pineapples Day Out" aria-hidden="true" >
+		<img class="logo" src="/assets/Logo.png" alt="Pineapples Day Out" aria-hidden="true" >
 		<div class="text-center">
 			<div class="mint-form" id="mint-form" style="display: none;">
 				<label class="d-block" >Mint your pineapples here, there are only <span id="pineapples-remaining">5000</span> pineapples left.<br>

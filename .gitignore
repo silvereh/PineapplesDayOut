@@ -4,3 +4,4 @@ Thumbs.db
 pineapples-generation/_assets/
 pineapples-generation/_output/
 .contract
+node_modules

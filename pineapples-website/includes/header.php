@@ -12,10 +12,10 @@
 			</button>
 			<div class="collapse navbar-collapse justify-content-between" id="navbarNavAltMarkup">
 				<div class="navbar-nav">
-					<a class="btn nav-item nav-link" href="#">Home</a>
-					<a class="btn nav-item nav-link" href="#about">About</a>
-					<a class="btn nav-item nav-link" href="#roadmap">Roadmap</a>
-					<a class="btn nav-item nav-link" href="#rarities">Rarities</a>
+					<a class="btn nav-item nav-link" href="/">Home</a>
+					<a class="btn nav-item nav-link" href="/#about">About</a>
+					<a class="btn nav-item nav-link" href="/#roadmap">Roadmap</a>
+					<a class="btn nav-item nav-link" href="/#rarities">Rarities</a>
 				</div>
 				<div class="navbar-nav navbar-right">
 					<a class="btn nav-item nav-link" href="https://twitter.com/pineapplesnfts">
