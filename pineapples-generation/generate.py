@@ -412,13 +412,14 @@ def allUnique(x):
 	seen = list()
 	return not any(i in seen or seen.append(i) for i in x)
 
-print(allUnique(traits))
+print("All unique: " + str(allUnique(traits)))
 
 # Name pineapples according to their number
+
 i = 0
 for item in traits:
-	item["TokenID"] = i
-	item["Name"] = "Pineapple #" + str(i)
+	item["ImageNumber"] = i
+	item["Name"] = "Pineapple #" + '{:0>4}'.format(i)
 	i = i + 1
 
 # Get counts for each trait
@@ -444,17 +445,32 @@ for item in fw:
 counts["Accessories"] = {}
 for item in ac:
 	counts["Accessories"][item] = 0
+counts["OneOfOne"] = 0
+
+signatures = [429, 700, 3942, 4134, 4806]
+# signatures = [4, 7, 31]
 
 for pineapple in traits:
-	counts["Background"][pineapple["Background"]] += 1
-	counts["Skin"][pineapple["Skin"]] += 1
-	counts["Mouth"][pineapple["Mouth"]] += 1
-	counts["Eyes"][pineapple["Eyes"]] += 1
-	counts["Crown"][pineapple["Crown"]] += 1
-	counts["Footwear"][pineapple["Footwear"]] += 1
-	counts["Accessories"][pineapple["Accessories"]] += 1
+	if pineapple["ImageNumber"] in signatures:
+		counts["OneOfOne"] += 1
+		pineapple["Background"] = ""
+		pineapple["Skin"] = ""
+		pineapple["Mouth"] = ""
+		pineapple["Eyes"] = ""
+		pineapple["Crown"] = ""
+		pineapple["Footwear"] = ""
+		pineapple["Accessories"] = ""
+	else:
+		counts["Background"][pineapple["Background"]] += 1
+		counts["Skin"][pineapple["Skin"]] += 1
+		counts["Mouth"][pineapple["Mouth"]] += 1
+		counts["Eyes"][pineapple["Eyes"]] += 1
+		counts["Crown"][pineapple["Crown"]] += 1
+		counts["Footwear"][pineapple["Footwear"]] += 1
+		counts["Accessories"][pineapple["Accessories"]] += 1
+
 with open("./_output/metadata/traitscount.json", "w") as of:
-	json.dump(counts, of, indent=2)
+			json.dump(counts, of, indent=2)
 
 # Write Metadata to json
 with open("./_output/metadata/traits.json", "w") as of:
@@ -463,67 +479,56 @@ with open("./_output/metadata/traits.json", "w") as of:
 # Generate images
 i = 0
 for item in traits:
-	if item["Background"] != "None":
-		img1 = Image.open(f'./_assets/bg/{bg_files[item["Background"]]}.png').convert('RGBA')
-	else:
-		img1 = Image.open(f'./_assets/none.png').convert('RGBA')
-		# img1 = ""
+	if item["ImageNumber"] not in signatures:
+		if item["Background"] != "None":
+			img1 = Image.open(f'./_assets/bg/{bg_files[item["Background"]]}.png').convert('RGBA')
+		else:
+			img1 = Image.open(f'./_assets/none.png').convert('RGBA')
 
-	if item["Skin"] != "None":
-		img2 = Image.open(f'./_assets/sk/{sk_files[item["Skin"]]}.png').convert('RGBA')
-	else:
-		img2 = Image.open(f'./_assets/none.png').convert('RGBA')
-		# img2 = ""
+		if item["Skin"] != "None":
+			img2 = Image.open(f'./_assets/sk/{sk_files[item["Skin"]]}.png').convert('RGBA')
+		else:
+			img2 = Image.open(f'./_assets/none.png').convert('RGBA')
 
-	if item["Mouth"] != "None":
-		img3 = Image.open(f'./_assets/mo/{mo_files[item["Mouth"]]}.png').convert('RGBA')
-	else:
-		img3 = Image.open(f'./_assets/none.png').convert('RGBA')
-		# img3 = ""
+		if item["Mouth"] != "None":
+			img3 = Image.open(f'./_assets/mo/{mo_files[item["Mouth"]]}.png').convert('RGBA')
+		else:
+			img3 = Image.open(f'./_assets/none.png').convert('RGBA')
 
-	if item["Eyes"] != "None":
-		img4 = Image.open(f'./_assets/ey/{ey_files[item["Eyes"]]}.png').convert('RGBA')
-	else:
-		img4 = Image.open(f'./_assets/none.png').convert('RGBA')
-		# img4 = ""
+		if item["Eyes"] != "None":
+			img4 = Image.open(f'./_assets/ey/{ey_files[item["Eyes"]]}.png').convert('RGBA')
+		else:
+			img4 = Image.open(f'./_assets/none.png').convert('RGBA')
 
-	if item["Crown"] != "None":
-		img5 = Image.open(f'./_assets/cr/{cr_files[item["Crown"]]}.png').convert('RGBA')
-	else:
-		img5 = Image.open(f'./_assets/none.png').convert('RGBA')
-		# img5 = ""
+		if item["Crown"] != "None":
+			img5 = Image.open(f'./_assets/cr/{cr_files[item["Crown"]]}.png').convert('RGBA')
+		else:
+			img5 = Image.open(f'./_assets/none.png').convert('RGBA')
 
-	if item["Footwear"] != "None":
-		img6 = Image.open(f'./_assets/fw/{fw_files[item["Footwear"]]}.png').convert('RGBA')
-	else:
-		img6 = Image.open(f'./_assets/none.png').convert('RGBA')
-		# img6 = ""
+		if item["Footwear"] != "None":
+			img6 = Image.open(f'./_assets/fw/{fw_files[item["Footwear"]]}.png').convert('RGBA')
+		else:
+			img6 = Image.open(f'./_assets/none.png').convert('RGBA')
 
-	if item["Accessories"] != "None":
-		img7 = Image.open(f'./_assets/ac/{ac_files[item["Accessories"]]}.png').convert('RGBA')
-	else:
-		img7 = Image.open(f'./_assets/none.png').convert('RGBA')
-		# img7 = ""
+		if item["Accessories"] != "None":
+			img7 = Image.open(f'./_assets/ac/{ac_files[item["Accessories"]]}.png').convert('RGBA')
+		else:
+			img7 = Image.open(f'./_assets/none.png').convert('RGBA')
 
-	# Mash images
-	com1 = Image.alpha_composite(img1, img2)
+		# Mash images
+		com1 = Image.alpha_composite(img1, img2)
+		com2 = Image.alpha_composite(com1, img3)
+		com3 = Image.alpha_composite(com2, img4)
+		com4 = Image.alpha_composite(com3, img5)
+		com5 = Image.alpha_composite(com4, img6)
+		com6 = Image.alpha_composite(com5, img7)
 
-	com2 = Image.alpha_composite(com1, img3)
+		# Convert to RGB
+		result = com6.convert('RGB')
 
-	com3 = Image.alpha_composite(com2, img4)
+		# Save file
+		filename = str('{:0>4}'.format(item["ImageNumber"])) + ".jpg"
+		result.save("./_output/images/" + filename)
+		print(f'{str(i)} done')
 
-	com4 = Image.alpha_composite(com3, img5)
-
-	com5 = Image.alpha_composite(com4, img6)
-
-	com6 = Image.alpha_composite(com5, img7)
-
-
-	# Convert to RGB
-	result = com6.convert('RGB')
-
-	# Save file
-	filename = str(i) + ".jpg"
-	result.save("./_output/images/" + filename)
-	print(f'{str(i)} done')
 	i = i + 1
