@@ -5,3 +5,4 @@ pineapples-generation/_assets/
 pineapples-generation/_output/
 .contract
 node_modules
+pineapples-website/*.sql
