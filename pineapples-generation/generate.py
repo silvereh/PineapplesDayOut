@@ -419,7 +419,6 @@ print("All unique: " + str(allUnique(traits)))
 i = 0
 for item in traits:
 	item["ImageNumber"] = i
-	item["Name"] = "Pineapple #" + '{:0>4}'.format(i)
 	i = i + 1
 
 # Get counts for each trait
@@ -447,8 +446,7 @@ for item in ac:
 	counts["Accessories"][item] = 0
 counts["OneOfOne"] = 0
 
-signatures = [429, 700, 3942, 4134, 4806]
-# signatures = [4, 7, 31]
+signatures = [72, 2836]
 
 for pineapple in traits:
 	if pineapple["ImageNumber"] in signatures:
@@ -470,7 +468,7 @@ for pineapple in traits:
 		counts["Accessories"][pineapple["Accessories"]] += 1
 
 with open("./_output/metadata/traitscount.json", "w") as of:
-			json.dump(counts, of, indent=2)
+	json.dump(counts, of, indent=2)
 
 # Write Metadata to json
 with open("./_output/metadata/traits.json", "w") as of:
