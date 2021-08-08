@@ -1,0 +1,15 @@
+{
+  "name": "pineapples-generation",
+  "version": "1.0.0",
+  "description": "How to generate pineapple images:",
+  "main": "pinata.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@pinata/sdk": "^1.1.23",
+    "fs": "0.0.1-security"
+  }
+}
