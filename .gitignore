@@ -6,3 +6,5 @@ pineapples-generation/_output/
 .contract
 node_modules
 pineapples-website/*.sql
+.IPFS_*
+pineapples-website/api/INFURA.php

@@ -26,28 +26,28 @@
 					<p>5000 Coconuts are released on the blockchain<br>A cocktail bar has popped up in the neighbourhood</p>
 				</div>
 			</div>
-			<div class='line-container'>
-				<div class='progress-line'>
-					<div class='progress' style="width: 0%;">
+			<div class="line-container">
+				<div class="progress-line">
+					<div class="progress" id="progress" style="width: 0%;">
 					</div>
-					<div class='status dot1'>
-						<div class='dot current'>
+					<div class="status dot1">
+						<div class="dot completed">
 						</div>
 					</div>
-					<div class='status dot2'>
-						<div class='dot'>
+					<div class="status dot2">
+						<div class="dot">
 						</div>
 					</div>
-					<div class='status dot3'>
-						<div class='dot'>
+					<div class="status dot3">
+						<div class="dot">
 						</div>
 					</div>
-					<div class='status dot4'>
-						<div class='dot'>
+					<div class="status dot4">
+						<div class="dot">
 						</div>
 					</div>
-					<div class='status dot5'>
-						<div class='dot'>
+					<div class="status dot5">
+						<div class="dot">
 						</div>
 					</div>
 				</div>

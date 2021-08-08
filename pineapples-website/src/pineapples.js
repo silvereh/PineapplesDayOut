@@ -13,6 +13,7 @@ const SELECTORS = {
 		QUANTITY: 'pineapples-quantity',
 		PRICE: 'pineapples-price',
 	},
+	PROGRESS: 'progress',
 }
 var accounts = []
 let provider;
@@ -23,6 +24,23 @@ let salesOpen;
 let totalSupply;
 let unitPrice;
 let mintQuantity = 0;
+
+function updateProgress(_totalSupply) {
+	let progress = 100 * _totalSupply / MAX_SUPPLY;
+	document.getElementById(SELECTORS.PROGRESS).style.width = `${progress}%`;
+	if (progress >= 25 && !document.querySelector('.dot2').classList.contains('completed')) {
+		document.querySelector('.dot2').classList.add('current');
+	}
+	if (progress >= 50 && !document.querySelector('.dot3').classList.contains('completed')) {
+		document.querySelector('.dot3').classList.add('current');
+	}
+	if (progress >= 75 && !document.querySelector('.dot4').classList.contains('completed')) {
+		document.querySelector('.dot4').classList.add('current');
+	}
+	if (progress >= 100 && !document.querySelector('.dot5').classList.contains('completed')) {
+		document.querySelector('.dot5').classList.add('current');
+	}
+}
 
 async function getAccount() {
 	const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
@@ -56,6 +74,7 @@ async function getTotalSupply() {
 	const result = await contract.totalSupply();
 	totalSupply = result;
 	document.getElementById(SELECTORS.PINEAPPLES.REMAINING).innerText = `${new Intl.NumberFormat().format(MAX_SUPPLY - totalSupply)}`;
+	updateProgress(result);
 }
 
 async function updatePrice() {
@@ -127,9 +146,13 @@ async function startApp() {
 		console.log("Transfer From: ", _from);
 		console.log("Transfer To: ", _to);
 		console.log("User Account: ", _userAccount);
-		if ( _from === "0x0000000000000000000000000000000000000000" && _to === _userAccount ) {
-			document.getElementById(SELECTORS.ALERT).innerHTML = `<p class="form-control alert-success">Congratulations! You just got juiced!</p>`;
-			document.getElementById(SELECTORS.MINT.BUTTON).disabled = false;
+		if ( _from === "0x0000000000000000000000000000000000000000" ) {
+			totalSupply ++;
+			updateProgress(totalSupply);
+			if ( _to === _userAccount ) {
+				document.getElementById(SELECTORS.ALERT).innerHTML = `<p class="form-control alert-success">Congratulations! You just got juiced!</p>`;
+				document.getElementById(SELECTORS.MINT.BUTTON).disabled = false;
+			}
 		}
 	});
 	contract.on("SalesFlipped", async salesState => {
