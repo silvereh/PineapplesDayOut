@@ -392,9 +392,9 @@
 			<div class="home-wrap">
 				<div id="alert"></div>
 				<h1 class="sr-only">Pineapples Day Out</h1>
-				<img class="logo" src="Logo.png" alt="Pineapples Day Out" aria-hidden="true" >
+				<img class="logo" src="./assets/Logo.png" alt="Pineapples Day Out" aria-hidden="true" >
 				<div class="text-center">
-					<form class="mint-form" id="mint-form" style="display: none;">
+					<div class="mint-form" id="mint-form" style="display: none;">
 						<label class="d-block" >Mint your pineapples here, there are only <span id="pineapples-remaining">5000</span> pineapples left.<br>
 							<select class="form-control" name="pineapples-quantity" id="pineapples-quantity">
 								<option value="0" selected>Select a number of pineapples to mint</option>
@@ -424,8 +424,8 @@
 							You will pay <span id="pineapples-price">0.000</span> ETH for this transaction.
 						</label>
 						<button class="btn btn-mint" id="mint-button">Juice Me!</button>
-					</form>
-					<button class="btn btn-mint" disabled id="coming">Coming Soon</button>
+					</div>
+					<div class="mint-form" id="coming">Minting is started, check in your MetaMask or TrustWallet browser to access the minting form.</div>
 				</div>
 			</div>
 		</section>
