@@ -203,6 +203,22 @@ label {
 	transform: rotate(-45deg);
 	z-index: 2;
 }
+.team-portrait {
+	background-color: #ffffa0;
+	margin: auto;
+	text-align: center;
+	min-height: 600px;
+}
+.team-thumbnail {
+	border-radius: 50%;
+	max-width: 60%;
+}
+.team-description {
+	font-size: 0.9rem;
+}
+.team {
+	min-height: 800px;
+}
 
 @media (max-width: 767px) {
 	.timeline-text,

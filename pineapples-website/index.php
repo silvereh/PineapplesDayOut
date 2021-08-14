@@ -27,6 +27,8 @@
 		<?php include('./content/roadmap.php'); ?>
 		<!-- Rarities -->
 		<?php include('./content/rarities.php'); ?>
+		<!-- Team -->
+		<?php include('./content/team.php'); ?>
 		<!-- Footer -->
 		<?php include('./includes/footer.php'); ?>
 		<script language="JavaScript" type="text/javascript" src="/src/pineapples.js?q=<?=time();?>"></script>

@@ -37,7 +37,7 @@
 				</label>
 				<button class="btn btn-mint" id="mint-button">Juice Me!</button>
 			</div>
-			<button class="btn btn-mint" disabled id="coming">Coming Soon</button>
+			<div class="mint-form" id="coming">Minting is started, check in your MetaMask or TrustWallet browser to access the minting form.</div>
 		</div>
 	</div>
 </section>

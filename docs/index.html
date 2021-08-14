@@ -39,13 +39,13 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 		<style type="text/css">
 			body {
-				background: #ffffa0 url("Background.jpeg") center top repeat fixed;
+				background: #ffffa0 url("/assets/Background.jpeg") center top repeat fixed;
 				color: #613613;
 				font-family: Arial;
 				position: relative;
 			}
 			header {
-				background: #ffffa0 url("Background.jpeg") center top repeat fixed;
+				background: #ffffa0 url("/assets/Background.jpeg") center top repeat fixed;
 				position: fixed;
 				top: 0;
 				left: 0;
@@ -56,7 +56,7 @@
 				z-index: 12;
 			}
 			footer {
-				background: #ffffa0 url("Background.jpeg") center top repeat fixed;
+				background: #ffffa0 url("/assets/Background.jpeg") center top repeat fixed;
 				position: fixed;
 				bottom: 0;
 				left: 0;
@@ -131,7 +131,7 @@
 				border: 0 !important;
 				clip: rect(1px, 1px, 1px, 1px) !important; /* 1 */
 				-webkit-clip-path: inset(50%) !important;
-					clip-path: inset(50%) !important;  /* 2 */
+				clip-path: inset(50%) !important;  /* 2 */
 				height: 1px !important;
 				margin: -1px !important;
 				overflow: hidden !important;
@@ -142,8 +142,8 @@
 			}
 			.navbar-toggler {
 				background-color: #ffffa0;
-		    border: 2px solid #613613;
-		    color: #613613;
+				border: 2px solid #613613;
+				color: #613613;
 			}
 			.nav-link.btn {
 				padding: 3px 10px;
@@ -173,11 +173,11 @@
 				grid-template-columns: 10vw auto;
 				grid-template-rows: auto;
 				grid-template-areas: 
-					"dot1 text1"
-					"dot2 text2"
-					"dot3 text3"
-					"dot4 text4"
-					"dot5 text5";
+				"dot1 text1"
+				"dot2 text2"
+				"dot3 text3"
+				"dot4 text4"
+				"dot5 text5";
 			}
 			.text1 {
 				grid-area: text1;
@@ -210,38 +210,54 @@
 				grid-area: dot5;
 			}
 			.line-container .status {
-			  position: relative;
-			  top: 40%;
+				position: relative;
+				top: 40%;
 			}
 			.line-container .status .dot {
-			  width: 20px;
-			  height: 20px;
-			  border-radius: 50%;
-			  background: white;
-			  border: 5px solid gray;
-			  cursor: pointer;
+				width: 20px;
+				height: 20px;
+				border-radius: 50%;
+				background: white;
+				border: 5px solid gray;
+				cursor: pointer;
 			}
 			.line-container .status .dot.current {
-			  background: white;
-			  border: 5px solid #613613;
+				background: white;
+				border: 5px solid #613613;
 			}
 			.line-container .status .dot.completed {
-			  position: relative;
-			  background: #613613;
-			  border: 5px solid #613613;
+				position: relative;
+				background: #613613;
+				border: 5px solid #613613;
 			}
 			.line-container .status .dot.completed::after {
-			  content: "";
-			  position: absolute;
-			  top: calc(50% - 4px);
-			  left: calc(50% - 4.5px);
-			  height: 5px;
-			  width: 10px;
-			  border-left: 2px solid white;
-			  border-bottom: 2px solid white;
-			  transform-origin: center;
-			  transform: rotate(-45deg);
-			  z-index: 2;
+				content: "";
+				position: absolute;
+				top: calc(50% - 4px);
+				left: calc(50% - 4.5px);
+				height: 5px;
+				width: 10px;
+				border-left: 2px solid white;
+				border-bottom: 2px solid white;
+				transform-origin: center;
+				transform: rotate(-45deg);
+				z-index: 2;
+			}
+			.team-portrait {
+				background-color: #ffffa0;
+				margin: auto;
+				text-align: center;
+				min-height: 600px;
+			}
+			.team-thumbnail {
+				border-radius: 50%;
+				max-width: 60%;
+			}
+			.team-description {
+				font-size: 0.9rem;
+			}
+			.team {
+				min-height: 800px;
 			}
 
 			@media (max-width: 767px) {
@@ -283,34 +299,34 @@
 					text-align: center;
 				}
 				.line-container {
-				  display: flex;
-				  margin-top: -28%;
-				  margin-bottom: 30%;
-				  position: relative;
-				  width: 100%;
-				  z-index: 5;
-				  top: -5vh;
+					display: flex;
+					margin-top: -28%;
+					margin-bottom: 30%;
+					position: relative;
+					width: 100%;
+					z-index: 5;
+					top: -5vh;
 				}
 				.line-container .progress-line {
-				  position: relative;
-				  margin: 0 auto;
-				  border-radius: 10px;
-				  width: 85%;
-				  background: gray;
-				  height: 5px;
-				  z-index: -1;
-				  display: flex;
-				  justify-content: space-between;
+					position: relative;
+					margin: 0 auto;
+					border-radius: 10px;
+					width: 85%;
+					background: gray;
+					height: 5px;
+					z-index: -1;
+					display: flex;
+					justify-content: space-between;
 				}
 				.line-container .progress-line .progress {
-				  position: absolute;
-				  width: 75%;
-				  height: 100%;
-				  background: #613613;
-				  transition: width 1s ease-in-out;
+					position: absolute;
+					width: 75%;
+					height: 100%;
+					background: #613613;
+					transition: width 1s ease-in-out;
 				}
 				.line-container .status {
-				  top: -7px;
+					top: -7px;
 				}
 			}
 			@media (min-width: 960px) {
@@ -318,8 +334,8 @@
 					height: 700px;
 				}
 				.line-container {
-				  margin-top: -11%;
-				  margin-bottom: 15%;
+					margin-top: -11%;
+					margin-bottom: 15%;
 				}
 			}
 		</style>
@@ -337,10 +353,11 @@
 					</button>
 					<div class="collapse navbar-collapse justify-content-between" id="navbarNavAltMarkup">
 						<div class="navbar-nav">
-							<a class="btn nav-item nav-link" href="#">Home</a>
-							<a class="btn nav-item nav-link" href="#about">About</a>
-							<a class="btn nav-item nav-link" href="#roadmap">Roadmap</a>
-							<a class="btn nav-item nav-link" href="#rarities">Rarities</a>
+							<a class="btn nav-item nav-link" href="/">Home</a>
+							<a class="btn nav-item nav-link" href="/#about">About</a>
+							<a class="btn nav-item nav-link" href="/#roadmap">Roadmap</a>
+							<a class="btn nav-item nav-link" href="/#rarities">Rarities</a>
+							<a class="btn nav-item nav-link" href="/#team">Team</a>
 						</div>
 						<div class="navbar-nav navbar-right">
 							<a class="btn nav-item nav-link" href="https://twitter.com/pineapplesnfts">
@@ -351,7 +368,7 @@
 									</svg>
 								</span>
 							</a>
-							<a class="btn nav-item nav-link" href="https://discord.gg/DB5auVdN">
+							<a class="btn nav-item nav-link" href="https://discord.gg/3jSh2GTZCm">
 								<span class="d-flex">
 									<svg width="71" height="55" viewBox="0 0 71 55" fill="none" xmlns="http://www.w3.org/2000/svg">
 										<title>Follow us on Discord</title>
@@ -454,28 +471,28 @@
 							<p>5000 Coconuts are released on the blockchain<br>A cocktail bar has popped up in the neighbourhood</p>
 						</div>
 					</div>
-					<div class='line-container'>
-						<div class='progress-line'>
-							<div class='progress' style="width: 0%;">
+					<div class="line-container">
+						<div class="progress-line">
+							<div class="progress" id="progress" style="width: 0%;">
 							</div>
-							<div class='status dot1'>
-								<div class='dot current'>
+							<div class="status dot1">
+								<div class="dot completed">
 								</div>
 							</div>
-							<div class='status dot2'>
-								<div class='dot'>
+							<div class="status dot2">
+								<div class="dot">
 								</div>
 							</div>
-							<div class='status dot3'>
-								<div class='dot'>
+							<div class="status dot3">
+								<div class="dot">
 								</div>
 							</div>
-							<div class='status dot4'>
-								<div class='dot'>
+							<div class="status dot4">
+								<div class="dot">
 								</div>
 							</div>
-							<div class='status dot5'>
-								<div class='dot'>
+							<div class="status dot5">
+								<div class="dot">
 								</div>
 							</div>
 						</div>
@@ -503,14 +520,70 @@
 				<p class="rarity text-center">Page will be updated at 100% Sold</p>
 			</div>
 		</section>
+		<section class="team" id="team">
+			<div class="container-fluid">
+				<h2>About the team</h2>
+				<div class="row">
+					<div class="col-12 col-md-6 col-lg-3">
+						<div class="d-flex mb-5">
+							<div class="team-portrait">
+								<img class="team-thumbnail mb-3" src="/assets/vandemlau.jpg" alt="" />
+								<h3 class="mb-2">Vanessa (vandemlau#0301)</h3>
+								<p>Founder / Artist</p>
+								<div class="team-description">
+									Laura is a small 23 year-old Ugandan female who enjoys watching sports and playing video games. She graduated in May with a Bachelors Degree in Commerce, majoring in Accounting. She has been active in the NFT community since late March 2021. She was able to identify the general under-representation of Africans in NFTs. She has been trying to (and will continue to) bring them on board in any way that she can, using <a target="_blank" href="https://twitter.com/AFR_ToTheWorld">@AFR_ToTheWorld</a>. She believes everyone needs to have a chance to create a future for themselves.
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-12 col-md-6 col-lg-3">
+						<div class="d-flex mb-5">
+							<div class="team-portrait">
+								<img class="team-thumbnail mb-3" src="/assets/kashushu.jpg" alt="" />
+								<h3 class="mb-2">Natasha (kabcd#7344)</h3>
+								<p>Lead Artist / Co-Founder</p>
+								<div class="team-description">
+									Natasha is a woman and an artist. If she had to describe herself in three words, she would fail because there’s only one definition for her, and that’s art. She recently joined the NFT community in late march 2021 and there’s nothing better than having a community that appreciates art in all its glory. She hopes to make her name known and respected in the community. She also loves pineapple juice and dark chocolate.
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-12 col-md-6 col-lg-3">
+						<div class="d-flex mb-5">
+							<div class="team-portrait">
+								<img class="team-thumbnail mb-3" src="/assets/alina.jpg" alt="" />
+								<h3 class="mb-2">Silvere (Alina#4526)</h3>
+								<p>Developer</p>
+								<div class="team-description">
+									Silvere is a 34 year-old French expatriate living currently in Idaho with his wife and his two kids. He has been observing the NFT space since March 2021 and decided to learn blockchain and smart contract development in May. Since then, he was able to quickly learn enough to be able to deploy his first smart contract in the first half of July, before joining the Pineapples team as sole developer. He spends most of his free time helping out others on Discord developer circles.
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-12 col-md-6 col-lg-3">
+						<div class="d-flex mb-5">
+							<div class="team-portrait">
+								<img class="team-thumbnail mb-3" src="/assets/pineapplehead.jpg" alt="" />
+								<h3 class="mb-2">Sydney (PineappleHead#4535)</h3>
+								<p>Community Manager</p>
+								<div class="team-description">
+									Sydney is a Ugandan from a family of 4; a law student currently studying in Uganda Christian University (UCU), but his education has been disrupted by the pandemic as the government placed lockdown restrictions in 2020 as a way to prevent the spread of COVID. Even though he has not been able to study and complete his classes as smoothly as he would have hoped, he would love to incorporate law with technology such as NFTs. Pineapples Day Out is his first NFT project.
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
 		<footer>
 			<div class="container-fluid">
 				© Copyright Pineapples Day Out 2021
 			</div>
 		</footer>
-		<script type="module" src="./web3/pineapples.js"></script>
-		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+		<script src="https://cdn.ethers.io/lib/ethers-5.0.umd.min.js" type="text/javascript"></script>
+		<script language="JavaScript" type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<script language="JavaScript" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+		<script language="JavaScript" type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+		<script language="JavaScript" type="text/javascript" src="/src/pineapples_abi.js?q=<?=time();?>"></script>
 	</body>
 </html>

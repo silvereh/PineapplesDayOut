@@ -16,6 +16,7 @@
 					<a class="btn nav-item nav-link" href="/#about">About</a>
 					<a class="btn nav-item nav-link" href="/#roadmap">Roadmap</a>
 					<a class="btn nav-item nav-link" href="/#rarities">Rarities</a>
+					<a class="btn nav-item nav-link" href="/#team">Team</a>
 				</div>
 				<div class="navbar-nav navbar-right">
 					<a class="btn nav-item nav-link" href="https://twitter.com/pineapplesnfts">
