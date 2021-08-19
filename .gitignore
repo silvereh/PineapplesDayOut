@@ -5,6 +5,8 @@ pineapples-generation/_assets/
 pineapples-generation/_output/
 .contract
 node_modules
-pineapples-website/*.sql
+*/*.sql
+*/*.zip
 .IPFS_*
 pineapples-website/api/INFURA.php
+pineapples-website/api/DATABASE.php

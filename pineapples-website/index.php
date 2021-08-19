@@ -15,6 +15,8 @@
 		<?php include('./includes/socials.php'); ?>
 		<!-- Styles -->
 		<?php include('./includes/styles.php'); ?>
+		<script language="JavaScript" type="text/javascript" src="/src/pineapples_abi.js" async></script>
+		<script language="JavaScript" type="text/javascript" src="/src/pineapples.js" async></script>
 	</head>
 	<body data-spy="scroll" data-target="#navigation" data-offset="350">
 		<!-- Header -->
@@ -31,11 +33,5 @@
 		<?php include('./content/team.php'); ?>
 		<!-- Footer -->
 		<?php include('./includes/footer.php'); ?>
-		<script language="JavaScript" type="text/javascript" src="/src/pineapples.js?q=<?=time();?>"></script>
-		<script language="JavaScript" type="text/javascript">
-			window.addEventListener( 'DOMContentLoaded', function(){
-				init();
-			});
-		</script>
 	</body>
 </html>

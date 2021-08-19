@@ -35,15 +35,15 @@
 						</div>
 					</div>
 					<div class="status dot2">
-						<div class="dot">
+						<div class="dot completed">
 						</div>
 					</div>
 					<div class="status dot3">
-						<div class="dot">
+						<div class="dot completed">
 						</div>
 					</div>
 					<div class="status dot4">
-						<div class="dot">
+						<div class="dot current">
 						</div>
 					</div>
 					<div class="status dot5">

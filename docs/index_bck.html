@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- Basic Metadata -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="author" content="Pineapples Day Out">
+		<meta name="description" content="Pineapples Day Out is a collection of 5000 programmatically, randomly generated NFTs based on 109 different traits such as skins, crowns, accessories, and others, on the Ethereum blockchain.">
+		<title>Pineapples Day Out</title>
+		<!-- Favicon -->
+		<link rel="apple-touch-icon" sizes="57x57" href="./apple-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="./apple-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="./apple-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="./apple-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="./apple-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="./apple-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="./apple-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="./apple-icon-152x152.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="./apple-icon-180x180.png">
+		<link rel="icon" type="image/png" sizes="192x192"  href="./android-icon-192x192.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="96x96" href="./favicon-96x96.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+		<link rel="manifest" href="./manifest.json">
+		<meta name="msapplication-TileColor" content="#ffffff">
+		<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+		<meta name="theme-color" content="#ffffff">
+		<!-- Social Media Embeds -->
+		<meta property="og:title" content="Pineapples Day Out">
+		<meta property="og:description" content="Pineapples Day Out is a collection of 5000 programmatically, randomly generated NFTs based on 109 different traits such as skins, crowns, accessories, and others, on the Ethereum blockchain.">
+		<meta property="og:image" content="/Social.jpeg">
+		<meta property="og:url" content="http://www.pineapplesdayout.com">
+		<meta name="twitter:card" content="summary_large_image">
+		<meta name="twitter:site" content="@pineapplesnfts">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Teko:wght@600&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<style type="text/css">
+			body {
+				background: #ffffa0 url("./assets/Background.jpeg") center top repeat fixed;
+				color: #613613;
+				font-family: Arial;
+				position: relative;
+			}
+			header {
+				background: #ffffa0 url("./assets/Background.jpeg") center top repeat fixed;
+				position: fixed;
+				top: 0;
+				left: 0;
+				right: 0;
+				height:  11.5vh;
+				padding: 10px;
+				width:  100%;
+				z-index: 12;
+			}
+			footer {
+				background: #ffffa0 url("./assets/Background.jpeg") center top repeat fixed;
+				position: fixed;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				text-align: center;
+				padding: 3vh;
+				height: 10vh;
+				width: 100%;
+				z-index: 10;
+			}
+			section {
+				min-height: 78.5vh;
+				width: 100%;
+				padding: 10vh 30px;
+			}
+			section:not(.home) {
+				background-color: #ffffa0;
+			}
+			section:first-of-type {
+				margin-top: 11.5vh;
+			}
+			section:last-of-type {
+				margin-bottom: 10vh;
+			}
+			h2 {
+				margin-bottom: 1em;
+			}
+			h3 {
+				font-size: 18px;
+			}
+			label {
+				font-size: 1.2em;
+				font-weight: 600;
+			}
+			.btn {
+				background-color: #ffffa0;
+				border: 2px solid #613613;
+				color: #613613;
+				font-family: 'Teko', sans-serif;
+				text-transform: uppercase;
+				font-size: 1.2em;
+			}
+			.home-wrap {
+				margin: auto;
+			}
+			.logo {
+				max-width: 100%;
+				max-height: 150px;
+			}
+			.mint-form {
+				background-color: #ffffa0;
+				border: 1px solid #613613;
+				border-radius: 4px;
+				box-shadow: .5rem .5rem .5rem rgba(0,0,0,50%);
+				padding: 20px 30px;
+			}
+			.btn-mint {
+				background-color: #613613;
+				color: #ffffa0;
+				font-size: 1.5em;
+				margin-top: 1em;
+			}
+			.btn-mint[disabled] {
+				opacity: 85%;
+			}
+			.btn-mint:not([disabled]):hover,
+			.btn-mint:not([disabled]):focus {
+				background-color: #ffffa0;
+				color: #613613;
+			}
+			.sr-only {
+				border: 0 !important;
+				clip: rect(1px, 1px, 1px, 1px) !important; /* 1 */
+				-webkit-clip-path: inset(50%) !important;
+				clip-path: inset(50%) !important;  /* 2 */
+				height: 1px !important;
+				margin: -1px !important;
+				overflow: hidden !important;
+				padding: 0 !important;
+				position: absolute !important;
+				width: 1px !important;
+				white-space: nowrap !important;            /* 3 */
+			}
+			.navbar-toggler {
+				background-color: #ffffa0;
+				border: 2px solid #613613;
+				color: #613613;
+			}
+			.nav-link.btn {
+				padding: 3px 10px;
+				margin: 10px;
+			}
+			.nav-link.btn:hover,
+			.nav-link.btn.active {
+				background-color: #613613;
+				color: #ffffa0;
+			}
+			.nav-link.btn svg,
+			.nav-link.btn svg {
+				height: 29px;
+				width: 29px;
+			}
+			.nav-link.btn:hover svg path,
+			.nav-link.btn.active svg path {
+				fill: #ffffa0;
+			}
+			.rarity {
+				margin-top: 25vh;
+			}
+
+			/* Roadmap Progress bar*/
+			.timeline {
+				display: grid;
+				grid-template-columns: 10vw auto;
+				grid-template-rows: auto;
+				grid-template-areas: 
+				"dot1 text1"
+				"dot2 text2"
+				"dot3 text3"
+				"dot4 text4"
+				"dot5 text5";
+			}
+			.text1 {
+				grid-area: text1;
+			}
+			.text2 {
+				grid-area: text2;
+			}
+			.text3 {
+				grid-area: text3;
+			}
+			.text4 {
+				grid-area: text4;
+			}
+			.text5 {
+				grid-area: text5;
+			}
+			.dot1 {
+				grid-area: dot1;
+			}
+			.dot2 {
+				grid-area: dot2;
+			}
+			.dot3 {
+				grid-area: dot3;
+			}
+			.dot4 {
+				grid-area: dot4;
+			}
+			.dot5 {
+				grid-area: dot5;
+			}
+			.line-container .status {
+				position: relative;
+				top: 40%;
+			}
+			.line-container .status .dot {
+				width: 20px;
+				height: 20px;
+				border-radius: 50%;
+				background: white;
+				border: 5px solid gray;
+				cursor: pointer;
+			}
+			.line-container .status .dot.current {
+				background: white;
+				border: 5px solid #613613;
+			}
+			.line-container .status .dot.completed {
+				position: relative;
+				background: #613613;
+				border: 5px solid #613613;
+			}
+			.line-container .status .dot.completed::after {
+				content: "";
+				position: absolute;
+				top: calc(50% - 4px);
+				left: calc(50% - 4.5px);
+				height: 5px;
+				width: 10px;
+				border-left: 2px solid white;
+				border-bottom: 2px solid white;
+				transform-origin: center;
+				transform: rotate(-45deg);
+				z-index: 2;
+			}
+			.team-portrait {
+				background-color: #ffffa0;
+				margin: auto;
+				text-align: center;
+				min-height: 600px;
+			}
+			.team-thumbnail {
+				border-radius: 50%;
+				max-width: 60%;
+			}
+			.team-description {
+				font-size: 0.9rem;
+			}
+			.team {
+				min-height: 800px;
+			}
+
+			@media (max-width: 767px) {
+				.timeline-text,
+				.line-container,
+				.progress-line {
+					display: contents;
+				}
+				.progress {
+					display: none;
+				}
+			}
+
+			/* At higher screen sizes */
+			@media (min-width: 768px) {
+				header {
+					height:  14vh;
+				}
+				section:first-of-type {
+					margin-top: 14vh;
+				}
+				section {
+					height: 76vh;
+				}
+				section.roadmap {
+					height: 900px;
+				}
+				h3 {
+					margin-bottom: 5em;
+				}
+				.btn-mint {
+					font-size: 2em;
+				}
+				/* Roadmap Progress bar*/
+				.timeline {
+					display: contents;
+				}
+				.timeline-text {
+					text-align: center;
+				}
+				.line-container {
+					display: flex;
+					margin-top: -28%;
+					margin-bottom: 30%;
+					position: relative;
+					width: 100%;
+					z-index: 5;
+					top: -5vh;
+				}
+				.line-container .progress-line {
+					position: relative;
+					margin: 0 auto;
+					border-radius: 10px;
+					width: 85%;
+					background: gray;
+					height: 5px;
+					z-index: -1;
+					display: flex;
+					justify-content: space-between;
+				}
+				.line-container .progress-line .progress {
+					position: absolute;
+					width: 75%;
+					height: 100%;
+					background: #613613;
+					transition: width 1s ease-in-out;
+				}
+				.line-container .status {
+					top: -7px;
+				}
+			}
+			@media (min-width: 960px) {
+				section.roadmap {
+					height: 700px;
+				}
+				.line-container {
+					margin-top: -11%;
+					margin-bottom: 15%;
+				}
+			}
+		</style>
+	</head>
+	<body data-spy="scroll" data-target="#navigation" data-offset="350">
+		<header>
+			<div class="container-fluid" id="navigation">
+				<nav class="nav navbar navbar-expand-md">
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="d-flex">
+							<svg viewBox='0 0 10 8' width='40'>
+								<path d='M1 1h8M1 4h 8M1 7h8' stroke='#613613' stroke-width='1' stroke-linecap='round'/>
+							</svg>
+						</span>
+					</button>
+					<div class="collapse navbar-collapse justify-content-between" id="navbarNavAltMarkup">
+						<div class="navbar-nav">
+							<a class="btn nav-item nav-link" href="./">Home</a>
+							<a class="btn nav-item nav-link" href="./#about">About</a>
+							<a class="btn nav-item nav-link" href="./#roadmap">Roadmap</a>
+							<a class="btn nav-item nav-link" href="./#rarities">Rarities</a>
+							<a class="btn nav-item nav-link" href="./#team">Team</a>
+						</div>
+						<div class="navbar-nav navbar-right">
+							<a class="btn nav-item nav-link" href="https://opensea.io/collection/pineapplesdayout">
+								<span class="d-flex">
+									<svg width="90" height="90" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path d="M45 0C20.151 0 0 20.151 0 45C0 69.849 20.151 90 45 90C69.849 90 90 69.849 90 45C90 20.151 69.858 0 45 0ZM22.203 46.512L22.392 46.206L34.101 27.891C34.272 27.63 34.677 27.657 34.803 27.945C36.756 32.328 38.448 37.782 37.656 41.175C37.323 42.57 36.396 44.46 35.352 46.206C35.217 46.458 35.073 46.71 34.911 46.953C34.839 47.061 34.713 47.124 34.578 47.124H22.545C22.221 47.124 22.032 46.773 22.203 46.512ZM74.376 52.812C74.376 52.983 74.277 53.127 74.133 53.19C73.224 53.577 70.119 55.008 68.832 56.799C65.538 61.38 63.027 67.932 57.402 67.932H33.948C25.632 67.932 18.9 61.173 18.9 52.83V52.56C18.9 52.344 19.08 52.164 19.305 52.164H32.373C32.634 52.164 32.823 52.398 32.805 52.659C32.706 53.505 32.868 54.378 33.273 55.17C34.047 56.745 35.658 57.726 37.395 57.726H43.866V52.677H37.467C37.143 52.677 36.945 52.299 37.134 52.029C37.206 51.921 37.278 51.813 37.368 51.687C37.971 50.823 38.835 49.491 39.699 47.97C40.284 46.944 40.851 45.846 41.31 44.748C41.4 44.55 41.472 44.343 41.553 44.145C41.679 43.794 41.805 43.461 41.895 43.137C41.985 42.858 42.066 42.57 42.138 42.3C42.354 41.364 42.444 40.374 42.444 39.348C42.444 38.943 42.426 38.52 42.39 38.124C42.372 37.683 42.318 37.242 42.264 36.801C42.228 36.414 42.156 36.027 42.084 35.631C41.985 35.046 41.859 34.461 41.715 33.876L41.661 33.651C41.553 33.246 41.454 32.868 41.328 32.463C40.959 31.203 40.545 29.97 40.095 28.818C39.933 28.359 39.753 27.918 39.564 27.486C39.294 26.82 39.015 26.217 38.763 25.65C38.628 25.389 38.52 25.155 38.412 24.912C38.286 24.642 38.16 24.372 38.025 24.111C37.935 23.913 37.827 23.724 37.755 23.544L36.963 22.086C36.855 21.888 37.035 21.645 37.251 21.708L42.201 23.049H42.219C42.228 23.049 42.228 23.049 42.237 23.049L42.885 23.238L43.605 23.436L43.866 23.508V20.574C43.866 19.152 45 18 46.413 18C47.115 18 47.754 18.288 48.204 18.756C48.663 19.224 48.951 19.863 48.951 20.574V24.939L49.482 25.083C49.518 25.101 49.563 25.119 49.599 25.146C49.725 25.236 49.914 25.38 50.148 25.56C50.337 25.704 50.535 25.884 50.769 26.073C51.246 26.46 51.822 26.955 52.443 27.522C52.605 27.666 52.767 27.81 52.92 27.963C53.721 28.71 54.621 29.583 55.485 30.555C55.728 30.834 55.962 31.104 56.205 31.401C56.439 31.698 56.7 31.986 56.916 32.274C57.213 32.661 57.519 33.066 57.798 33.489C57.924 33.687 58.077 33.894 58.194 34.092C58.554 34.623 58.86 35.172 59.157 35.721C59.283 35.973 59.409 36.252 59.517 36.522C59.85 37.26 60.111 38.007 60.273 38.763C60.327 38.925 60.363 39.096 60.381 39.258V39.294C60.435 39.51 60.453 39.744 60.471 39.987C60.543 40.752 60.507 41.526 60.345 42.3C60.273 42.624 60.183 42.93 60.075 43.263C59.958 43.578 59.85 43.902 59.706 44.217C59.427 44.856 59.103 45.504 58.716 46.098C58.59 46.323 58.437 46.557 58.293 46.782C58.131 47.016 57.96 47.241 57.816 47.457C57.609 47.736 57.393 48.024 57.168 48.285C56.97 48.555 56.772 48.825 56.547 49.068C56.241 49.437 55.944 49.779 55.629 50.112C55.449 50.328 55.251 50.553 55.044 50.751C54.846 50.976 54.639 51.174 54.459 51.354C54.144 51.669 53.892 51.903 53.676 52.11L53.163 52.569C53.091 52.641 52.992 52.677 52.893 52.677H48.951V57.726H53.91C55.017 57.726 56.07 57.339 56.925 56.61C57.213 56.358 58.482 55.26 59.985 53.604C60.039 53.541 60.102 53.505 60.174 53.487L73.863 49.527C74.124 49.455 74.376 49.644 74.376 49.914V52.812V52.812Z" fill="#613613"/>
+									</svg>
+								</span>
+							</a>
+							<a class="btn nav-item nav-link" href="https://twitter.com/pineapplesnfts">
+								<span class="d-flex">
+									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+										<title>Follow us on Twitter</title>
+										<path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z" fill="#613613"/>
+									</svg>
+								</span>
+							</a>
+							<a class="btn nav-item nav-link" href="https://discord.gg/3jSh2GTZCm">
+								<span class="d-flex">
+									<svg width="71" height="55" viewBox="0 0 71 55" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<title>Follow us on Discord</title>
+										<g clip-path="url(#clip0)">
+											<path d="M60.1045 4.8978C55.5792 2.8214 50.7265 1.2916 45.6527 0.41542C45.5603 0.39851 45.468 0.440769 45.4204 0.525289C44.7963 1.6353 44.105 3.0834 43.6209 4.2216C38.1637 3.4046 32.7345 3.4046 27.3892 4.2216C26.905 3.0581 26.1886 1.6353 25.5617 0.525289C25.5141 0.443589 25.4218 0.40133 25.3294 0.41542C20.2584 1.2888 15.4057 2.8186 10.8776 4.8978C10.8384 4.9147 10.8048 4.9429 10.7825 4.9795C1.57795 18.7309 -0.943561 32.1443 0.293408 45.3914C0.299005 45.4562 0.335386 45.5182 0.385761 45.5576C6.45866 50.0174 12.3413 52.7249 18.1147 54.5195C18.2071 54.5477 18.305 54.5139 18.3638 54.4378C19.7295 52.5728 20.9469 50.6063 21.9907 48.5383C22.0523 48.4172 21.9935 48.2735 21.8676 48.2256C19.9366 47.4931 18.0979 46.6 16.3292 45.5858C16.1893 45.5041 16.1781 45.304 16.3068 45.2082C16.679 44.9293 17.0513 44.6391 17.4067 44.3461C17.471 44.2926 17.5606 44.2813 17.6362 44.3151C29.2558 49.6202 41.8354 49.6202 53.3179 44.3151C53.3935 44.2785 53.4831 44.2898 53.5502 44.3433C53.9057 44.6363 54.2779 44.9293 54.6529 45.2082C54.7816 45.304 54.7732 45.5041 54.6333 45.5858C52.8646 46.6197 51.0259 47.4931 49.0921 48.2228C48.9662 48.2707 48.9102 48.4172 48.9718 48.5383C50.038 50.6034 51.2554 52.5699 52.5959 54.435C52.6519 54.5139 52.7526 54.5477 52.845 54.5195C58.6464 52.7249 64.529 50.0174 70.6019 45.5576C70.6551 45.5182 70.6887 45.459 70.6943 45.3942C72.1747 30.0791 68.2147 16.7757 60.1968 4.9823C60.1772 4.9429 60.1437 4.9147 60.1045 4.8978ZM23.7259 37.3253C20.2276 37.3253 17.3451 34.1136 17.3451 30.1693C17.3451 26.225 20.1717 23.0133 23.7259 23.0133C27.308 23.0133 30.1626 26.2532 30.1066 30.1693C30.1066 34.1136 27.28 37.3253 23.7259 37.3253ZM47.3178 37.3253C43.8196 37.3253 40.9371 34.1136 40.9371 30.1693C40.9371 26.225 43.7636 23.0133 47.3178 23.0133C50.9 23.0133 53.7545 26.2532 53.6986 30.1693C53.6986 34.1136 50.9 37.3253 47.3178 37.3253Z" fill="#613613"/>
+										</g>
+										<defs>
+											<clipPath id="clip0">
+												<rect width="71" height="55" fill="white"/>
+											</clipPath>
+										</defs>
+									</svg>
+								</span>
+							</a>
+						</div>
+					</div>
+				</nav>
+			</div>
+		</header>
+		<section class="home text-center d-flex" id="home">
+			<div class="home-wrap">
+				<div id="alert"></div>
+				<h1 class="sr-only">Pineapples Day Out</h1>
+				<img class="logo" src="./assets/Logo.png" alt="Pineapples Day Out" aria-hidden="true" >
+				<div class="text-center">
+					<div class="mint-form" id="mint-form" style="display: none;">
+						<label class="d-block" >Mint your pineapples here, there are only <span id="pineapples-remaining">5000</span> pineapples left.<br>
+							<select class="form-control" name="pineapples-quantity" id="pineapples-quantity">
+								<option value="0" selected>Select a number of pineapples to mint</option>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+								<option value="6">6</option>
+								<option value="7">7</option>
+								<option value="8">8</option>
+								<option value="9">9</option>
+								<option value="10">10</option>
+								<option value="11">11</option>
+								<option value="12">12</option>
+								<option value="13">13</option>
+								<option value="14">14</option>
+								<option value="15">15</option>
+								<option value="16">16</option>
+								<option value="17">17</option>
+								<option value="18">18</option>
+								<option value="19">19</option>
+								<option value="20">20</option>
+							</select>
+						</label>
+						<label class="d-block">
+							You will pay <span id="pineapples-price">0.000</span> ETH for this transaction.
+						</label>
+						<button class="btn btn-mint" id="mint-button">Juice Me!</button>
+					</div>
+					<div class="mint-form" id="coming">Minting is started, check in your MetaMask or TrustWallet browser to access the minting form.</div>
+				</div>
+			</div>
+		</section>
+		<section class="about" id="about">
+			<div class="container-fluid">
+				<div class="row align-items-center">
+					<div class="col-12 col-md-4">
+						<p>Pineapples Day Out is a collection of 5000 programmatically, randomly generated NFTs based on 109 different traits such as skins, crowns, accessories, and others, on the Ethereum blockchain.</p>
+					</div>
+					<div class="col-12 col-md-7 offset-md-1">
+						<h2>FAQ</h2>
+						<p>- What is the price per mint?<br>0.02 Fixed Price</p>
+						<p>- Where does my Pineapples Day Out NFT go after I purchase?<br>Your Pineapple(s) will appear in whatever address or connected wallet you used to purchase. You can also see your Pineapple(s) on Opensea.</p>
+						<p>- How many Pineapples can I mint?<br>20 Pineapples per transaction</p>
+						<p>- What can I do with my Pineapple?<br>Anything. Just do not try to eat it.</p>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="roadmap" id="roadmap">
+			<div class="container-fluid">
+				<h2 class="sr-only">Roadmap</h2>
+				<div class="timeline">
+					<div class="row timeline-text">
+						<div class="col-12 col-md text1">
+							<h3>PRE-SALE</h3>
+							<p>Community Building<br>Complete Artwork</p>
+						</div>
+						<div class="col-12 col-md text2">
+							<h3>25% SOLD</h3>
+							<p>Pineapple Bay is opened<br>Construction of the Museum begins</p>
+						</div>
+						<div class="col-12 col-md text3">
+							<h3>50% SOLD</h3>
+							<p>Museum is being furnished and a Grand Opening event is being prepared</p>
+						</div>
+						<div class="col-12 col-md text4">
+							<h3>75% SOLD</h3>
+							<p>Grand Opening of the Museum</p>
+						</div>
+						<div class="col-12 col-md text5">
+							<h3>100% SOLD</h3>
+							<p>5000 Coconuts are released on the blockchain<br>A cocktail bar has popped up in the neighbourhood</p>
+						</div>
+					</div>
+					<div class="line-container">
+						<div class="progress-line">
+							<div class="progress" id="progress" style="width: 0%;">
+							</div>
+							<div class="status dot1">
+								<div class="dot completed">
+								</div>
+							</div>
+							<div class="status dot2">
+								<div class="dot">
+								</div>
+							</div>
+							<div class="status dot3">
+								<div class="dot">
+								</div>
+							</div>
+							<div class="status dot4">
+								<div class="dot">
+								</div>
+							</div>
+							<div class="status dot5">
+								<div class="dot">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12 col-md">
+						<p>Pineapple Bay is a beach that is open to all members of the community. This is where all celebrations of road-map milestone achievements will take place throughout the decade.</p>
+						<p>So.. grab a drink, wear your shades and party like its 1999.</p>
+					</div>
+					<div class="col-12 col-md-5">
+						<p>The Museum will be opened to all members of the community to visit anytime. What makes the museum special is that it will be filled with artwork that is on the Ethereum blockchain. All artwork will be bought by the moderators through direct purchases, placing bids via auction and making offers.</p>
+						<p>95% of the artwork bought for the museum would have been created by verified pineapple holders and the remaining 5% would have been created by non-verified pineapple holders.</p>
+					</div>
+					<div class="col-12 col-md">
+						<p>The Cocktail bar is an exclusive bar for only the holders of both pineapples and coconuts. There will be weekly game nights hosted by the Moderators.</p>
+						<p>These include Trivia, Poker, Riddles and then Giveaways. There will be prizes of other NFTs or even Ethereum.</p>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="rarities" id="rarities">
+			<div class="container-fluid">
+				<h2 class="sr-only">Rarities</h2>
+				<p class="rarity text-center">Page will be updated at 100% Sold</p>
+			</div>
+		</section>
+		<section class="team" id="team">
+			<div class="container-fluid">
+				<h2>About the team</h2>
+				<div class="row">
+					<div class="col-12 col-md-6 col-lg-3">
+						<div class="d-flex mb-5">
+							<div class="team-portrait">
+								<img class="team-thumbnail mb-3" src="./assets/vandemlau.jpg" alt="" />
+								<h3 class="mb-2">Vanessa (vandemlau#0301)</h3>
+								<p>Founder / Artist</p>
+								<div class="team-description">
+									Laura is a small 23 year-old Ugandan female who enjoys watching sports and playing video games. She graduated in May with a Bachelors Degree in Commerce, majoring in Accounting. She has been active in the NFT community since late March 2021. She was able to identify the general under-representation of Africans in NFTs. She has been trying to (and will continue to) bring them on board in any way that she can, using <a target="_blank" href="https://twitter.com/AFR_ToTheWorld">@AFR_ToTheWorld</a>. She believes everyone needs to have a chance to create a future for themselves.
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-12 col-md-6 col-lg-3">
+						<div class="d-flex mb-5">
+							<div class="team-portrait">
+								<img class="team-thumbnail mb-3" src="./assets/kashushu.jpg" alt="" />
+								<h3 class="mb-2">Natasha (kabcd#7344)</h3>
+								<p>Lead Artist / Co-Founder</p>
+								<div class="team-description">
+									Natasha is a woman and an artist. If she had to describe herself in three words, she would fail because there’s only one definition for her, and that’s art. She recently joined the NFT community in late march 2021 and there’s nothing better than having a community that appreciates art in all its glory. She hopes to make her name known and respected in the community. She also loves pineapple juice and dark chocolate.
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-12 col-md-6 col-lg-3">
+						<div class="d-flex mb-5">
+							<div class="team-portrait">
+								<img class="team-thumbnail mb-3" src="./assets/alina.jpg" alt="" />
+								<h3 class="mb-2">Silvere (Alina#4526)</h3>
+								<p>Developer</p>
+								<div class="team-description">
+									Silvere is a 34 year-old French expatriate living currently in Idaho with his wife and his two kids. He has been observing the NFT space since March 2021 and decided to learn blockchain and smart contract development in May. Since then, he was able to quickly learn enough to be able to deploy his first smart contract in the first half of July, before joining the Pineapples team as sole developer. He spends most of his free time helping out others on Discord developer circles.
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-12 col-md-6 col-lg-3">
+						<div class="d-flex mb-5">
+							<div class="team-portrait">
+								<img class="team-thumbnail mb-3" src="./assets/pineapplehead.jpg" alt="" />
+								<h3 class="mb-2">Sydney (PineappleHead#4535)</h3>
+								<p>Community Manager</p>
+								<div class="team-description">
+									Sydney is a Ugandan from a family of 4; a law student currently studying in Uganda Christian University (UCU), but his education has been disrupted by the pandemic as the government placed lockdown restrictions in 2020 as a way to prevent the spread of COVID. Even though he has not been able to study and complete his classes as smoothly as he would have hoped, he would love to incorporate law with technology such as NFTs. Pineapples Day Out is his first NFT project.
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<footer>
+			<div class="container-fluid">
+				© Copyright Pineapples Day Out 2021
+			</div>
+		</footer>
+		<script src="https://cdn.ethers.io/lib/ethers-5.0.umd.min.js" type="text/javascript"></script>
+		<script language="JavaScript" type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<script language="JavaScript" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+		<script language="JavaScript" type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+		<script language="JavaScript" type="text/javascript" src="./web3/pineapples_abi.js?q=<?=time();?>"></script>
+		<script language="JavaScript" type="text/javascript" src="./web3/pineapples.js?q=<?=time();?>"></script>
+		<script language="JavaScript" type="text/javascript">
+			window.addEventListener( 'DOMContentLoaded', function(){
+				init();
+			});
+		</script>
+	</body>
+</html>

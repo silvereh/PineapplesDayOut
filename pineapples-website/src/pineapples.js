@@ -24,6 +24,7 @@ let salesOpen;
 let totalSupply;
 let unitPrice;
 let mintQuantity = 0;
+let remaining = MAX_SUPPLY;
 
 function updateProgress(_totalSupply) {
 	let progress = 100 * _totalSupply / MAX_SUPPLY;
@@ -73,12 +74,13 @@ async function getSalesState() {
 async function getTotalSupply() {
 	const result = await contract.totalSupply();
 	totalSupply = result;
-	document.getElementById(SELECTORS.PINEAPPLES.REMAINING).innerText = `${new Intl.NumberFormat().format(MAX_SUPPLY - totalSupply)}`;
+	remaining = MAX_SUPPLY - totalSupply;
+	document.getElementById( SELECTORS.PINEAPPLES.REMAINING ).innerText = `${ new Intl.NumberFormat( ).format( remaining ) }`;
 	updateProgress(result);
 }
 
 async function updatePrice() {
-	mintQuantity = parseInt(document.getElementById(SELECTORS.PINEAPPLES.QUANTITY).value, 10);
+	mintQuantity = parseFloat(document.getElementById(SELECTORS.PINEAPPLES.QUANTITY).value, 10);
 	if ( mintQuantity < 1 || mintQuantity > 20 ) {
 		document.getElementById(SELECTORS.ALERT).innerHTML = `<p class="form-control alert-danger">Please, enter a valid number of pineapples.</p>`;
 		document.getElementById(SELECTORS.MINT.BUTTON).disabled = true;
@@ -95,21 +97,32 @@ async function updatePrice() {
 	return true;
 }
 
-async function mintPineapple() {
-	let canMint = false;
-	document.getElementById(SELECTORS.MINT.BUTTON).disabled = true;
-	document.getElementById(SELECTORS.ALERT).innerHTML = `<p class="form-control alert-info">Your transaction is processing, please wait...</p>`;
-	userAccount = await getAccount();
-	const signer = provider.getSigner();
-	const userBalance = await signer.getBalance();
-	if ( ethers.utils.formatUnits(userBalance) <= parseFloat(document.getElementById(SELECTORS.PINEAPPLES.PRICE).innerText) ) {
+function canPay( price, balance ) {
+	if ( price >= balance ) {
+		console.log( "Not enough ETH" );
 		document.getElementById(SELECTORS.ALERT).innerHTML = `<p class="form-control alert-warning">You don't have enough ETH to get juiced.</p>`;
+		return false;
 	}
 	else {
 		document.getElementById(SELECTORS.ALERT).innerHTML = '';
-		canMint = true;
+		return true;
 	}
+}
+
+async function mintPineapple() {
+	document.getElementById( SELECTORS.MINT.BUTTON ).disabled = true;
+	if ( remaining < mintQuantity ) {
+		document.getElementById( SELECTORS.ALERT ).innerHTML = `<p class="form-control alert-danger">There is not enough pineapples left!</p>`;
+		return;
+	}
+	userAccount = await getAccount();
+	const signer = provider.getSigner();
+	const userBalance = await signer.getBalance();
+	let _userBalance = ethers.utils.formatUnits(userBalance);
+	let _totalPrice = parseFloat(document.getElementById(SELECTORS.PINEAPPLES.PRICE).innerText);
+	let canMint = canPay( _totalPrice, _userBalance );
 	if ( canMint ) {
+		document.getElementById(SELECTORS.ALERT).innerHTML = `<p class="form-control alert-info">Your transaction is processing, please wait...</p>`;
 		const pineapplesMinter = new ethers.Contract(PINEAPPLES_ADDRESS, JSON.stringify(PINEAPPLES_ABI), signer);
 		// Set transaction parameters
 		const transactionParameters = {
@@ -140,9 +153,9 @@ async function startApp() {
 
 	contract = new ethers.Contract(PINEAPPLES_ADDRESS, JSON.stringify(PINEAPPLES_ABI), provider);
 	contract.on("Transfer", async (from, to, tokenId) => {
-		let _from = from.toString().toLowerCase();
-		let _to = to.toString().toLowerCase();
-		let _userAccount = userAccount.toString().toLowerCase();
+		let _from = from.toLowerCase();
+		let _to = to.toLowerCase();
+		let _userAccount = userAccount.toLowerCase();
 		console.log("Transfer From: ", _from);
 		console.log("Transfer To: ", _to);
 		console.log("User Account: ", _userAccount);
@@ -157,7 +170,7 @@ async function startApp() {
 	});
 	contract.on("SalesFlipped", async salesState => {
 		console.log("SalesFlipped: ", salesState);
-		salesOpen = salesState;
+		getSalesState( )
 	});
 
 	getSalesState();
@@ -208,3 +221,7 @@ async function init() {
 		updatePrice();
 	});
 }
+
+window.addEventListener( 'DOMContentLoaded', function() {
+	init();
+});
